@@ -9,16 +9,14 @@ public class Friendship{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
+    private int id;
 
-    // suggestion for foreign key
-    //@ManyToOne
-    //@JoinColumn(name = "user_id_1", referencedColumnName = "id")
-    //private User firstFriend;
-    @Column(name="firstFriendId")
-    private int firstFriendId;
-    @Column(name="secondFriendId")
-    private int secondFriendId;
+    @ManyToOne
+    @JoinColumn(name = "user_id_1", referencedColumnName = "id")
+    private User firstFriend;
+    @ManyToOne
+    @JoinColumn(name = "user_id_2",referencedColumnName = "id")
+    private User secondFriend;
     @Column(name="amountOwnedToSecondFriend")
     private double amount;
 
@@ -27,13 +25,13 @@ public class Friendship{
         this.amount = 0;
     }
     // Constructors, getters, and setters
-    public Friendship(int firstFriendId, int secondFriendId) {
-        this.firstFriendId = firstFriendId;
-        this.secondFriendId = secondFriendId;
+    public Friendship(User firstFriend, User secondFriend) {
+        this.firstFriend = firstFriend;
+        this.secondFriend = secondFriend;
     }
-    public Friendship(int firstFriendId, int secondFriendId, double amount) {
-        this.firstFriendId = firstFriendId;
-        this.secondFriendId = secondFriendId;
+    public Friendship(User firstFriend, User secondFriend, double amount) {
+        this.firstFriend = firstFriend;
+        this.secondFriend = secondFriend;
         this.amount = amount;
     }
     // getters

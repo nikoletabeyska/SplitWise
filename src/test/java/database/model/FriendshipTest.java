@@ -5,12 +5,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FriendshipTest {
+    User mihaela = new User("mihaela1","12345");
+    User nikoleta = new User("nikoletab","12345");
 
-    Friendship mihiAndNiki = new Friendship(1,2,10.35);
-    Friendship nikiAndMihi = new Friendship(5,6,10.35);
-    Friendship testFriendship = new Friendship(3,4);
+    User testUser1 = new User("testUser1","12345");
+    User testUser2 = new User("testUser2","12345");
 
-    Friendship oneAndTwo = new Friendship(7,8,10.35);
+    Friendship mihiAndNiki = new Friendship(mihaela,nikoleta,10.35);
+    Friendship nikiAndMihi = new Friendship(nikoleta,mihaela,10.35);
+
+    Friendship testFriendship = new Friendship(testUser2,testUser1);
+
+    Friendship oneAndTwo = new Friendship(testUser1,testUser2,10.35);
 
     @Test
     void testGetAmountOwnedByFirstToSecond() {
