@@ -10,7 +10,7 @@ public class GroupService {
     private final UserRepository userRepository = new UserRepository();
 
     public String addFriend(String userUsername, String friendUsername) {
-        if (friendUsername == null || friendUsername.trim().isEmpty()) {
+        if (!UserManager.isValidString(friendUsername)) {
             return "Invalid input. Username is required.";
         }
 
@@ -26,7 +26,7 @@ public class GroupService {
     }
 
     public String createGroup(String groupName, String[] users, String userUsername) {
-        if (groupName == null || groupName.trim().isEmpty()) {
+        if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
         }
         Set<User> groupMembers = new HashSet<>();

@@ -7,16 +7,14 @@ public class UserManager {
 
     private final UserRepository userRepository = new UserRepository();
 
-
     public String registerUser(String username, String password) {
-        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+        if (!isValidString(username) || !isValidString(password)) {
             return "Invalid input. Username and password are required.";
         }
 
         // Check if the username is already taken
         if (userRepository.getUserByUsername(username) != null) {
             return "Username is already taken. Please choose another one.";
-
         }
 
         User newUser = new User(username, password);
@@ -27,7 +25,7 @@ public class UserManager {
     }
 
     public String loginUser(String username, String password) {
-        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+        if (!isValidString(username) || !isValidString(password)) {
             return "Invalid input. Username and password are required.";
         }
 
@@ -39,6 +37,15 @@ public class UserManager {
 
         return "Login successful! Welcome, " + username + "!";
     }
+
+    public static boolean isValidString(String str) {
+        return !(str == null || str.trim().isEmpty());
+    }
+
+   // public boolean userExists(String username) {
+
+    //}
+
 
 
 
