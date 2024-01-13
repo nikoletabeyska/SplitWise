@@ -35,6 +35,14 @@ public class Friendship{
         this.amount = amount;
     }
     // getters
+    public User getFirstFriend() {
+        return this.firstFriend;
+    }
+
+    public User getSecondFriend() {
+        return secondFriend;
+    }
+
     public double getAmountOwnedByFirstToSecond() { return this.amount; }
     public double getAmountOwnedBySecondToFirst() { return -(this.amount); }
     // setters
