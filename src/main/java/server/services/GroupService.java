@@ -9,22 +9,6 @@ import java.util.Set;
 public class GroupService {
     private final UserRepository userRepository = new UserRepository();
 
-    public String addFriend(String userUsername, String friendUsername) {
-        if (!UserManager.isValidString(friendUsername)) {
-            return "Invalid input. Username is required.";
-        }
-
-        User friend = userRepository.getUserByUsername(friendUsername);
-        if (friend == null) {
-            return "User with such username does not exist.";
-        }
-
-        //add to friendhip table or to group table
-
-        return "User " + friendUsername + " has been successfully added to your friends list.";
-
-    }
-
     public String createGroup(String groupName, String[] users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
