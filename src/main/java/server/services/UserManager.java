@@ -7,7 +7,7 @@ public class UserManager {
 
     private final UserRepository userRepository = new UserRepository();
 
-    public String registerUser(String username, String password) {
+    public String registerUser(String username, String password, String userUsername) {
         if (!isValidString(username) || !isValidString(password)) {
             return "Invalid input. Username and password are required.";
         }
@@ -19,12 +19,13 @@ public class UserManager {
 
         User newUser = new User(username, password);
         userRepository.createUser(newUser);
+        userUsername = username;
 
         return "User registered successfully!";
 
     }
 
-    public String loginUser(String username, String password) {
+    public String loginUser(String username, String password, boolean isLoggedIn) {
         if (!isValidString(username) || !isValidString(password)) {
             return "Invalid input. Username and password are required.";
         }
@@ -35,6 +36,7 @@ public class UserManager {
             return "Invalid username or password. Please try again.";
         }
 
+        isLoggedIn = true;
         return "Login successful! Welcome, " + username + "!";
     }
 

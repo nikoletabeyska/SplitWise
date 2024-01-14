@@ -1,7 +1,6 @@
 package server;
 
-
-
+import server.services.FriendshipService;
 import server.services.UserManager;
 
 import java.io.BufferedReader;
@@ -17,10 +16,16 @@ public class ClientHandler implements Runnable {
     private BufferedReader reader;
 
     private static UserManager userManager;
+    private static FriendshipService friendshipService;
+    private boolean isLoggedIn;
+    private String userUsername;
 
     public ClientHandler(Socket clientSocket) {
         this.clientSocket = clientSocket;
         this.userManager = new UserManager();
+        this.friendshipService = new FriendshipService();
+        this.isLoggedIn = false;
+        this.userUsername = null;
     }
 
     @Override
@@ -56,12 +61,22 @@ public class ClientHandler implements Runnable {
 
         switch (commandType) {
             case "register":
-                return userManager.registerUser(parts[1], parts[2]);
+                return userManager.registerUser(parts[1], parts[2], userUsername);
             case "login":
-                //  return userManager.loginUser(parts[1], parts[2]);
+                return userManager.loginUser(parts[1], parts[2], isLoggedIn);
             case "add-friend":
+                if (isLoggedIn) {
+                    return friendshipService.addFriend(userUsername, parts[1]);
+                } else {
+                    return "This command requires log in.";
+                }
                 // return handleAddFriend(parts);
             case "create-group":
+                if (isLoggedIn) {
+
+                } else {
+                    return "This command requires log in.";
+                }
                 //  return handleCreateGroup(parts);
             case "split":
                 // return handleSplit(parts);
@@ -91,7 +106,5 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private static String handleRegister(String username, String password) {
-        return userManager.registerUser(username,password);
-    }
+
 }

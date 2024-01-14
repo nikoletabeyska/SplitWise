@@ -3,6 +3,7 @@ package database.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -33,6 +34,8 @@ public class User{
     // getters
     public String getUsername() { return this.username; }
     public String getPassword() { return this.password; }
+    public int getId() { return this.id; }
+
     // setters
     public void setUserName(String username){
         this.username=username;
@@ -40,4 +43,22 @@ public class User{
     public void setPassword(String password){
         this.password=password;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User otherUser = (User) obj;
+        return id == otherUser.id && username.equals(otherUser.username) && password.equals(otherUser.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password);
+    }
+
 }
