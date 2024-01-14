@@ -3,7 +3,9 @@ package server.repository;
 import database.model.Moneyflow;
 import database.model.User;
 import jakarta.persistence.*;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +22,9 @@ class TransactionRepositoryTest {
     @BeforeAll
     static void setUp() {
 
-        entityManager = Persistence.createEntityManagerFactory("TestPersistenceUnit").createEntityManager();
-
-        transactionRepository = new TransactionRepository();
+        String persistence_unit = "TestPersistenceUnit";
+        entityManager = Persistence.createEntityManagerFactory(persistence_unit).createEntityManager();
+        transactionRepository = new TransactionRepository(persistence_unit);
 
 
         //Create
@@ -43,10 +45,10 @@ class TransactionRepositoryTest {
 
 
             //Create mock transactions
-            entityManager.persist(new Moneyflow(mihinka,nikinka, 10, "Mock"));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock"));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 20, "Mock"));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock"));
+            entityManager.persist(new Moneyflow(mihinka,nikinka, 10, "Mock",true));
+            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock",true));
+            entityManager.persist(new Moneyflow(mihinka,daninko, 20, "Mock",true));
+            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock",true));
 
             transaction.commit();
         } catch (Exception e) {
@@ -81,8 +83,25 @@ class TransactionRepositoryTest {
     @Test
     void getOwedMoneyFromIndividuals() {
         User userToGet = PrimitiveUserGet("Mihinka");
-       List<Object[]> result = transactionRepository.getOwedMoneyFromIndividuals(userToGet);
-       int a =3;
+       Map<User,Double> result = transactionRepository.getOwedMoneyFromIndividuals(userToGet);
+        Map<User,Double> expected = new HashMap<User,Double>()
+        {{
+            put(PrimitiveUserGet("Nikinka"),10.0);
+            put(PrimitiveUserGet("Daninko"),40.0);
+
+        }};
+        assertEquals(result,expected);
+    }
+    @Test
+    void getOwedMoneyToIndividuals() {
+        User userToGet = PrimitiveUserGet("Daninko");
+        Map<User,Double> result = transactionRepository.getOwedMoneyToIndividuals(userToGet);
+        Map<User,Double> expected = new HashMap<User,Double>()
+        {{
+            put(PrimitiveUserGet("Mihinka"),40.0);
+
+        }};
+        assertEquals(expected,result);
     }
 
     @Test

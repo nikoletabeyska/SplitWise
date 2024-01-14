@@ -32,7 +32,7 @@ public class Moneyflow {
 
     public Moneyflow(){
         this.amount=0;
-        this.isActive=false;
+        this.isActive=true;
     }
 
     public Moneyflow(User giver, User taker, double amount, String reason){
@@ -40,6 +40,7 @@ public class Moneyflow {
         this.taker =taker;
         this.amount=amount;
         this.reason=reason;
+        this.isActive = true;
     }
     public Moneyflow(User giver, User taker, double amount, String reason, boolean isActive){
         this(giver,taker,amount,reason);

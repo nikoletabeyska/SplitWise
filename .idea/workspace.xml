@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a/storage_v2/_src_/schema/splitwise_db.n2Gn2g.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a/storage_v2/_src_/schema/splitwise_db.n2Gn2g.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/model/Moneyflow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/model/Moneyflow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +94,7 @@
       <workItem from="1705008166057" duration="3111000" />
       <workItem from="1705011285753" duration="1597000" />
       <workItem from="1705062438516" duration="31378000" />
-      <workItem from="1705239009662" duration="4183000" />
+      <workItem from="1705239009662" duration="9566000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -128,36 +129,6 @@
           <url>file://$PROJECT_DIR$/src/test/java/database/model/GroupTest.java</url>
           <line>24</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

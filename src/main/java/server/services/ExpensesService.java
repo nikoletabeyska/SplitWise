@@ -6,9 +6,7 @@ import server.repository.FriendshipRepository;
 import server.repository.TransactionRepository;
 import server.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ExpensesService {
 
@@ -17,7 +15,7 @@ public class ExpensesService {
 
     public ExpensesService() {
         userRepository = new UserRepository();
-        transactionRepository = new TransactionRepository();
+        transactionRepository = new TransactionRepository("SplitWisePersistenceUnit");
     }
     public ExpensesService(UserRepository userRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
@@ -67,12 +65,24 @@ public class ExpensesService {
         //Get all transaction in which user is part of
         List<Moneyflow> transactions =transactionRepository.getAllTransactions(user);
         String result = "";
-        for (Moneyflow t:transactions) {
-            //Takew
+        //Individual transactions
+        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFromIndividuals(user);
+        Map<User,Double> owedTo =transactionRepository.getOwedMoneyToIndividuals(user);
 
-        return "";
-        }
+        //Make owed money to be negative
+        owedTo.forEach((muser, amount) -> amount = -amount);
 
+        // Merge the maps by adding amounts for common users
+        Map<User, Double> mergedMap = new HashMap<>(owedFrom);
+
+        owedTo.forEach((muser, amount) ->
+                mergedMap.merge(muser, amount, Double::sum));
+
+        for (Map.Entry<User, Double> entry : mergedMap.entrySet()) {
+            User muser = entry.getKey();
+            Double amount = entry.getValue();
+            System.out.println(muser.getUsername() + ": " + amount);
+        };
         return "";
     }
 }
