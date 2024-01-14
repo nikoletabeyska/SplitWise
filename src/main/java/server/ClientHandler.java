@@ -87,11 +87,12 @@ public class ClientHandler implements Runnable {
                     int nameParamIndex = 1;
                     //Name should be a valid not null strin
                     if(parts[nameParamIndex] != null && parts[nameParamIndex].trim().isEmpty()== false) {
-
                         ArrayList<String> usersToAdd = new ArrayList<>();
                         for (int i = 2; i < parts.length; i++) {
                             usersToAdd.add(parts[i]);
                         }
+                        //Add self to group
+                        usersToAdd.add(this.userUsername);
                         return groupService.createGroup(parts[nameParamIndex],usersToAdd);
                     }
                     else

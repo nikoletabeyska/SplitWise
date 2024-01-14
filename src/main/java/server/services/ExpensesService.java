@@ -1,26 +1,33 @@
 package server.services;
 
+import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
 import server.repository.FriendshipRepository;
+import server.repository.GroupRepository;
 import server.repository.TransactionRepository;
 import server.repository.UserRepository;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class ExpensesService {
 
     private final UserRepository userRepository;
+    private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
 
     public ExpensesService() {
         userRepository = new UserRepository();
-        transactionRepository = new TransactionRepository("SplitWisePersistenceUnit");
+        groupRepository = new GroupRepository("TestPersistenceUnit");
+        transactionRepository = new TransactionRepository("TestPersistenceUnit");
     }
-    public ExpensesService(UserRepository userRepository, TransactionRepository transactionRepository) {
-        this.userRepository = userRepository;
-        this.transactionRepository = transactionRepository;
-    };
+    public ExpensesService(UserRepository u, GroupRepository g, TransactionRepository t) {
+        userRepository = u;
+        groupRepository = g;
+        transactionRepository =t;
+    }
 
     public String split(String giverName,  String takerName,Double amount, String reason) {
         if (!UserManager.isValidString(giverName)) {
@@ -57,32 +64,59 @@ public class ExpensesService {
         }
         return "Successfully split money ";
     }
-    public String getStatus(String userName) {
-        if (!UserManager.isValidString(userName)) {
-            return "Invalid input. Username is required.";
-        }
-        User user = userRepository.getUserByUsername(userName);
-        //Get all transaction in which user is part of
-        List<Moneyflow> transactions =transactionRepository.getAllTransactions(user);
-        String result = "";
-        //Individual transactions
-        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,null);
-        Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,null);
 
-        //Make owed money to be negative
-        owedTo.forEach((muser, amount) -> amount = -amount);
+
+    public Map<User,Double> GetTotalAmountPerUser(User user, Group group)
+    {
+        //Individual transactions
+        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
+        Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,group);
+
+//        //Make owed money to be negative
+//        for ( User current : owedTo.keySet())
+//        {
+//            owedTo.replace(current, )
+//
+//        }
+        owedTo.forEach((muser, amount) -> owedTo.replace(muser,-amount));
 
         // Merge the maps by adding amounts for common users
         Map<User, Double> mergedMap = new HashMap<>(owedFrom);
 
         owedTo.forEach((muser, amount) ->
                 mergedMap.merge(muser, amount, Double::sum));
-
-        for (Map.Entry<User, Double> entry : mergedMap.entrySet()) {
+        return  mergedMap;
+    }
+    public String AppendTransactionCategory(String result, String categoryName, Map<User,Double> map)
+    {
+        result += "To/From" + categoryName + "\n";
+        for (Map.Entry<User, Double> entry : map.entrySet()) {
             User muser = entry.getKey();
             Double amount = entry.getValue();
-            System.out.println(muser.getUsername() + ": " + amount);
+            if(entry.getValue()<0)
+                result += "     " + "You owe " + muser.getUsername() + ": " + (-amount)+ "\n";
+            else
+                result += "     "  + muser.getUsername() + " owes you: " + amount+ "\n";
+
         };
-        return "";
+        return result;
+    }
+    public String getStatus(String userName) {
+        if (!UserManager.isValidString(userName)) {
+            return "Invalid input. Username is required.";
+        }
+        User user = userRepository.getUserByUsername(userName);
+        //Get all transaction in which user is part of
+        String result = "";
+        Map<User,Double> mergedMap = GetTotalAmountPerUser(user,null);
+        result += AppendTransactionCategory(result, "Individuals",mergedMap);
+        result += "Groups";
+        List<Group> groups = groupRepository.getAllGroups(user);
+        for(Group g : groups)
+        {
+            Map<User,Double> groupAmount = GetTotalAmountPerUser(user, g);
+            result += AppendTransactionCategory(result, g.getName(), groupAmount);
+        }
+        return result;
     }
 }

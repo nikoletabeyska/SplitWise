@@ -1,29 +1,28 @@
 package server.repository;
 
 import database.model.Group;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import database.model.User;
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Map;
 
 public class GroupRepository {
-    private static final String PERSISTENCE_UNIT_NAME = "SplitWisePersistenceUnit";
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager manager;
 
-    public GroupRepository() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    public GroupRepository(String repoName) {
+        this.manager = Persistence.createEntityManagerFactory(repoName).createEntityManager();
     }
 
     public void createGroup(Group group) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
 
         try {
-            transaction = entityManager.getTransaction();
+            transaction = manager.getTransaction();
             transaction.begin();
 
-            entityManager.persist(group);
+            manager.persist(group);
 
             transaction.commit();
         } catch (Exception e) {
@@ -31,9 +30,22 @@ public class GroupRepository {
                 transaction.rollback();
             }
             e.printStackTrace();
-        } finally {
-            entityManager.close();
         }
+    }
+    public List<Group> getAllGroups(User user) {
+        EntityTransaction transaction = null;
+        try {
+            //TODO check hot auto-join or simply join
+
+            Query query = manager.createQuery(
+                    "SELECT g FROM Group g WHERE :username in g.members  ",
+                    Group.class);
+            query.setParameter("username", user.getUsername());
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
