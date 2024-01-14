@@ -1,6 +1,9 @@
 package server;
 
+import server.repository.UserRepository;
+import server.services.ExpensesService;
 import server.services.FriendshipService;
+import server.services.GroupService;
 import server.services.UserManager;
 
 import java.io.BufferedReader;
@@ -8,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ClientHandler implements Runnable {
 
@@ -17,6 +22,8 @@ public class ClientHandler implements Runnable {
 
     private static UserManager userManager;
     private static FriendshipService friendshipService;
+    private static GroupService groupService;
+    private static ExpensesService expensesService;
     private boolean isLoggedIn;
     private String userUsername;
 
@@ -24,6 +31,8 @@ public class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
         this.userManager = new UserManager();
         this.friendshipService = new FriendshipService();
+        this.groupService = new GroupService();
+        this.expensesService = new ExpensesService();
         this.isLoggedIn = false;
         this.userUsername = null;
     }
@@ -73,15 +82,37 @@ public class ClientHandler implements Runnable {
                 // return handleAddFriend(parts);
             case "create-group":
                 if (isLoggedIn) {
+                    if(parts.length >=3 ) return "Not enought parameters to create a group";
+                    //Should always have a following param
+                    int nameParamIndex = 1;
+                    //Name should be a valid not null strin
+                    if(parts[nameParamIndex] != null && parts[nameParamIndex].trim().isEmpty()== false) {
 
+                        ArrayList<String> usersToAdd = new ArrayList<>();
+                        for (int i = 2; i < parts.length; i++) {
+                            usersToAdd.add(parts[i]);
+                        }
+                        return groupService.createGroup(parts[nameParamIndex],usersToAdd);
+                    }
+                    else
+                    {
+                        return "Invalid Name";
+                    }
                 } else {
                     return "This command requires log in.";
                 }
                 //  return handleCreateGroup(parts);
             case "split":
-                // return handleSplit(parts);
+                //TODO expects
+                if(parts.length <4) return "Not enough parameters";
+                if(isLoggedIn)
+                    expensesService.split(this.userUsername,parts[3],Double.valueOf(parts[1]),parts[2]);
+
             case "split-group":
-                // return handleSplitGroup(parts);
+                if(parts.length <4) return "Not enough parameters";
+                if(isLoggedIn)
+                    return expensesService.splitGroup(this.userUsername, Arrays.copyOfRange(parts,3,parts.length),Double.valueOf(parts[1]),parts[2]);
+                return "This command requires log in.";
             case "get-status":
                 //  return handleGetStatus(parts);
                 // Add more cases for other commands as needed

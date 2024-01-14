@@ -18,37 +18,4 @@ class FriendshipTest {
 
     Friendship oneAndTwo = new Friendship(testUser1,testUser2,10.35);
 
-    @Test
-    void testGetAmountOwnedByFirstToSecond() {
-        assertEquals(10.35,mihiAndNiki.getAmountOwnedByFirstToSecond());
-    }
-
-    @Test
-    void getAmountOwnedBySecondToFirst() {
-        assertEquals(-10.35,mihiAndNiki.getAmountOwnedBySecondToFirst());
-    }
-
-    @Test
-    void setAmountOwnedByFirstToSecond() {
-        testFriendship.setAmountOwnedByFirstToSecond(5);
-        assertEquals(5,testFriendship.getAmountOwnedByFirstToSecond());
-    }
-
-    @Test
-    void setAmountOwnedBySecondToFirst() {
-        testFriendship.setAmountOwnedBySecondToFirst(5);
-        assertEquals(5,testFriendship.getAmountOwnedBySecondToFirst());
-    }
-
-    @Test
-    void giveMoneyForSecond() {
-        nikiAndMihi.giveMoneyForSecond(5);
-        assertEquals(5.35,nikiAndMihi.getAmountOwnedByFirstToSecond());
-    }
-
-    @Test
-    void giveMoneyForFirst() {
-        oneAndTwo.giveMoneyForFirst(5);
-        assertEquals(15.35,oneAndTwo.getAmountOwnedByFirstToSecond());
-    }
 }

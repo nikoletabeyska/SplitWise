@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-@Table(name="group")
+@Table(name="groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="group_id")
+    @Column(name="id")
     private int id;
     @Column(name="name")
     private String name;
@@ -22,8 +22,8 @@ public class Group {
             joinColumns = @JoinColumn(name="group_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
-    private List<User> members;
 
+    private List<User> members;
     public Group(){
         this.members = new ArrayList<>();
     }

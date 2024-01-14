@@ -1,11 +1,14 @@
 package client;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
+
+import java.util.List;
 public class Client {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 7777;

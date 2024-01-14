@@ -3,13 +3,14 @@ package server.services;
 import database.model.User;
 import server.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class GroupService {
     private final UserRepository userRepository = new UserRepository();
 
-    public String createGroup(String groupName, String[] users, String userUsername) {
+    public String createGroup(String groupName, ArrayList<String> users) {
         if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
         }

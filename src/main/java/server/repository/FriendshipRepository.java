@@ -13,11 +13,19 @@ public class FriendshipRepository {
 
     public FriendshipRepository() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        //Seed database
+        Friendship f = new Friendship(new User("Gosho", "asd"),new User("Tosho", "123"));
+
+    }
+    public Friendship createNewFriendship(User from, User to)
+    {
+        return new Friendship(from, to);
     }
 
     public void addNewFriendship(Friendship friendship) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
+
 
         try {
             transaction = entityManager.getTransaction();

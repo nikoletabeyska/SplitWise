@@ -2,12 +2,11 @@ package database.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User{
 
     @Id
@@ -31,6 +30,7 @@ public class User{
         this.username = username;
         this.password = password;
     }
+
     // getters
     public String getUsername() { return this.username; }
     public String getPassword() { return this.password; }
