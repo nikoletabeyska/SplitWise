@@ -1,5 +1,6 @@
 package server.repository;
 
+import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
 
@@ -42,7 +43,7 @@ public class TransactionRepository {
     //Moneyflow object that is not in the database
     // that are NOT from a group and sums their amounts
     //Positive amounts means that money is being received, negative means money is owed
-    public Map<User,Double> getOwedMoneyToIndividuals(User user)
+    public Map<User,Double> getOwedMoneyTo(User user, Group group)
     {
         EntityTransaction transaction = null;
         try {
@@ -50,9 +51,10 @@ public class TransactionRepository {
 
             Query query = manager.createQuery(
                     "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
-                            "AND t.group=null AND isActive=true  group by t.giver",
+                            "AND  (:group IS NULL OR t.group = :group) AND isActive=true  group by t.giver",
                     Object[].class);
             query.setParameter("username", user.getUsername());
+            query.setParameter("group", group);
 
             Map<User,Double> toReturn = new HashMap<>();
             for (Object[] o : (List<Object[]>)query.getResultList())
@@ -69,7 +71,7 @@ public class TransactionRepository {
     //moneyflow object that is not in the database
     // that are NOT from a group and sums their amounts
     //Positive amounts means that money is being received, negative means money is owed
-    public  Map<User, Double> getOwedMoneyFromIndividuals(User user)
+    public  Map<User, Double> getOwedMoneyFrom(User user,Group group)
     {
         EntityTransaction transaction = null;
 
@@ -78,9 +80,10 @@ public class TransactionRepository {
 
             Query query = manager.createQuery(
                     "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
-                            "AND t.group=null AND isActive=true  group by t.taker",
+                            "AND (:group IS NULL OR t.group = :group) AND isActive=true  group by t.taker",
                     Object[].class);
             query.setParameter("username", user.getUsername());
+            query.setParameter("group", group);
 
             Map<User,Double> toReturn = new HashMap<>();
             for (Object[] o : (List<Object[]>)query.getResultList())

@@ -66,8 +66,8 @@ public class ExpensesService {
         List<Moneyflow> transactions =transactionRepository.getAllTransactions(user);
         String result = "";
         //Individual transactions
-        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFromIndividuals(user);
-        Map<User,Double> owedTo =transactionRepository.getOwedMoneyToIndividuals(user);
+        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,null);
+        Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,null);
 
         //Make owed money to be negative
         owedTo.forEach((muser, amount) -> amount = -amount);
