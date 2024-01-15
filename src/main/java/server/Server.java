@@ -83,22 +83,31 @@ public class Server {
 
             //TODO fix bug
             //Response WORKING
-            System.out.println("Received message from client: " + receivedMessage);
-            sendResponse(clientChannel,receivedMessage);
+            //System.out.println("Received message from client: " + receivedMessage);
+           // sendResponse(clientChannel,receivedMessage,buffer);
             //Respone NOT WORKING
-            //ClientHandler handlerForConnection = clients.get(clientChannel);
-            //String response = handlerForConnection.handleCommand(receivedMessage);
-            //System.out.println("Wanted Response" + response);
-            //sendResponse(clientChannel,response);
+            ClientHandler handlerForConnection = clients.get(clientChannel);
+            sendResponse(clientChannel, handlerForConnection.handleCommand(receivedMessage), buffer);
 
 
         }
     }
 
+    private static void sendResponse(SocketChannel clientChannel, String message, ByteBuffer buffer) throws IOException {
+        buffer.clear();
+        buffer.put(new String(message).getBytes());
+        buffer.flip();
 
-    private static void sendResponse(SocketChannel clientChannel, String message) throws IOException {
-        ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
-        clientChannel.write(buffer);
+        try {
+            while (buffer.hasRemaining()) {
+                clientChannel.write(buffer);
+                System.out.println("Buffer content: " + Arrays.toString(buffer.array()));
+            }
+        } catch (IOException e) {
+            // Handle the exception (e.g., client disconnected)
+            clientChannel.close();
+            System.out.println("Client disconnected");
+        }
     }
 
     private static void startServer() throws IOException {
@@ -148,7 +157,6 @@ public class Server {
     }
 
 }
-
 
 
 

@@ -9,53 +9,56 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 
 import java.nio.channels.SocketChannel;
 import java.util.List;
+import java.util.Scanner;
+
 public class Client {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 7777;
     private static SocketChannel socketChannel;
+    private static final int BUFFER_SIZE = 512;
+
+    private static ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
 
     public static void main(String[] args) {
-        try {
-            startClient();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private static void startClient() throws IOException {
-        Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
-        //Configure non blocking socket channel connected to the same endpoint
-        socketChannel=SocketChannel.open();
-        socketChannel.configureBlocking(false);
-        socketChannel.connect(new InetSocketAddress(SERVER_HOST,SERVER_PORT));
-        System.out.println("Connected to server: " + socket.getInetAddress());
+        try (SocketChannel socketChannel = SocketChannel.open();
+             Scanner scanner = new Scanner(System.in)) {
 
-        BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
-        OutputStream outputStream = socket.getOutputStream();
-        try {
+            socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
+
+            System.out.println("Connected to the server.");
+
             while (true) {
-                System.out.print("Enter message (type 'exit' to quit): ");
-                String userInput = userInputReader.readLine();
+                System.out.print("Enter message: ");
+                String message = scanner.nextLine(); // read a line from the console
 
-
-                if ("exit".equalsIgnoreCase(userInput)) {
+                if ("quit".equals(message)) {
                     break;
                 }
 
-                outputStream.write((userInput + "\n").getBytes());
-                outputStream.flush();
+                buffer.clear(); // switch to writing mode
+                buffer.put(message.getBytes()); // buffer fill
+                buffer.flip(); // switch to reading mode
+                socketChannel.write(buffer); // buffer drain
 
-                // Read and display the server's response
-                BufferedReader serverResponseReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String serverResponse = serverResponseReader.readLine();
-                System.out.println("Server response: " + serverResponse);
+                buffer.clear(); // switch to writing mode
+                socketChannel.read(buffer); // buffer fill
+                buffer.flip(); // switch to reading mode
+
+                byte[] byteArray = new byte[buffer.remaining()];
+                buffer.get(byteArray);
+                String reply = new String(byteArray, "UTF-8"); // buffer drain
+
+                System.out.println(reply);
             }
-        } finally {
-            socket.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException("There is a problem with the network communication", e);
         }
     }
 }
