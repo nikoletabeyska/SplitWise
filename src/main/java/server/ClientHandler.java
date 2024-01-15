@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ClientHandler implements Runnable {
 
-    private final Socket clientSocket;
     private PrintWriter writer;
     private BufferedReader reader;
 
@@ -27,36 +27,40 @@ public class ClientHandler implements Runnable {
     private boolean isLoggedIn;
     private String userUsername;
 
-    public ClientHandler(Socket clientSocket) {
-        this.clientSocket = clientSocket;
-        this.userManager = new UserManager();
-        this.friendshipService = new FriendshipService();
-        this.groupService = new GroupService();
-        this.expensesService = new ExpensesService();
-        this.isLoggedIn = false;
-        this.userUsername = null;
+    public ClientHandler() {
+//        this.userManager = new UserManager();
+//        this.friendshipService = new FriendshipService();
+//        this.groupService = new GroupService();
+//        this.expensesService = new ExpensesService();
+//        this.isLoggedIn = false;
+//        this.userUsername = null;
     }
 
+//    @Override
+//    public void run() {
+//        try {
+//            writer = new PrintWriter(clientSocket.getOutputStream(), true);
+//            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+//
+//            // Handle client commands
+//            String inputLine;
+//            while ((inputLine = reader.readLine()) != null) {
+//                String response = handleCommand(inputLine);
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeResources();
+//        }
+//    }
     @Override
-    public void run() {
-        try {
-            writer = new PrintWriter(clientSocket.getOutputStream(), true);
-            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    public void run()
+    {
 
-            // Handle client commands
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null) {
-                String response = handleCommand(inputLine);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            closeResources();
-        }
     }
 
-    private String handleCommand(String command) {
+    public String handleCommand(String command) {
         String[] parts = command.split("\\s+");
 
         if (parts.length < 1) {
@@ -104,7 +108,6 @@ public class ClientHandler implements Runnable {
                     return "This command requires log in.";
                 }
             case "split":
-                //TODO expects
                 if (parts.length < 4) return "Not enough parameters";
                 if (isLoggedIn) {
                     expensesService.split(this.userUsername,parts[3],Double.valueOf(parts[1]),parts[2]);
@@ -133,18 +136,5 @@ public class ClientHandler implements Runnable {
         //System.out.println("Received command from client: " + command);
         //out.println("Server response: " + command);
     }
-
-    private void closeResources() {
-        try {
-            if (writer != null) writer.close();
-            if (reader != null) reader.close();
-            if (clientSocket != null && !clientSocket.isClosed()) {
-                clientSocket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }
