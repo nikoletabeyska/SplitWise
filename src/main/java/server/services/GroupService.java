@@ -12,16 +12,17 @@ import java.util.List;
 import java.util.Set;
 
 public class GroupService {
-     private GroupRepository groupRepository ;
-    private UserRepository userRepository ;
+    private GroupRepository groupRepository;
+    private UserRepository userRepository;
+    private Logger logger;
 
-    public void GroupService()
-    {
-        groupRepository=new GroupRepository("TestPersistenceUnit");
-        userRepository=new UserRepository();
+    public void GroupService() {
+        groupRepository = new GroupRepository("TestPersistenceUnit");
+        userRepository = new UserRepository();
+        logger = new Logger();
     }
 
-    public String createGroup(String groupName, ArrayList<String> users) {
+    public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
         }
@@ -34,17 +35,21 @@ public class GroupService {
             groupMembers.add(user);
         }
         groupRepository.createGroup(new Group(groupName, groupMembers.stream().toList()));
+
+        logger.log("Created new group " + groupName, userUsername);
         return "Group " + groupName + " has been successfully created.";
 
     }
 
-    public String getFriends() {
-        return "";
-    }
-
     public String getGroups(User participant) {
-        groupRepository.getAllGroups(participant);
-        return "";
+        List<Group> groups = groupRepository.getAllGroups(participant);
+        String groupList = "Groups: \n";
+        for (Group g : groups) {
+            groupList += g.getName() + "\n";
+        }
+
+        logger.log("Viewed groups ", participant.getUsername());
+        return groupList;
     }
 
 }

@@ -10,15 +10,18 @@ import java.util.List;
 public class FriendshipService {
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
+    private final Logger logger;
 
     public FriendshipService() {
         userRepository = new UserRepository();
         friendshipRepository = new FriendshipRepository();
+        logger = new Logger();
     }
 
     public FriendshipService(UserRepository userRepository, FriendshipRepository friendshipRepository) {
         this.userRepository = userRepository;
         this.friendshipRepository = friendshipRepository;
+        this.logger = new Logger();
     }
 
     public String addFriend(String userUsername, String friendUsername) {
@@ -34,6 +37,8 @@ public class FriendshipService {
         Friendship friendship = new Friendship(user, friend);
         friendshipRepository.addNewFriendship(friendship);
 
+        logger.log("Added " + friendUsername + " as a friend.", userUsername);
+
         return "User " + friendUsername + " has been successfully added to your friends list.";
 
     }
@@ -41,37 +46,17 @@ public class FriendshipService {
     public String getAllFriendsList(String userUsername) {
         User user = userRepository.getUserByUsername(userUsername);
         List<Friendship> friendships = friendshipRepository.getAllFriendships(user);
-        String friendsList = "";
-        boolean isFirst = false;
-
-        /*
+        String friendsList = "Friends: \n";
         for (Friendship f : friendships) {
-            isFirst = false;
             if (f.getFirstFriend().equals(user)) {
-                isFirst = true;
-            }
-            if (f.getAmountOwnedByFirstToSecond() > 0) {
-                friendsList +=
-                    "* " + f.getSecondFriend().getUsername() + ": " + getOweMessage(isFirst, f.getAmountOwnedByFirstToSecond()) + "\n";
-            }
-            if (f.getAmountOwnedBySecondToFirst() > 0) {
-                friendsList +=
-                    "* " + f.getSecondFriend().getUsername() + ": " +  getOweMessage(!isFirst, f.getAmountOwnedBySecondToFirst()) + "\n";
+                friendsList += f.getSecondFriend().getUsername() + "\n";
+            } else {
+                friendsList += f.getFirstFriend().getUsername() + "\n";
             }
         }
 
-         */
-
+        logger.log("Viewed friend list.", userUsername);
         return friendsList;
     }
-
-    private String getOweMessage(boolean isOwe, double amount) {
-        if (isOwe) {
-            return "You owe " + amount + " LV";
-        } else {
-            return "Owes you " + amount + " LV";
-        }
-    }
-
 
 }

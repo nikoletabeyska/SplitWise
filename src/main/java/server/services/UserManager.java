@@ -5,7 +5,18 @@ import server.repository.UserRepository;
 
 public class UserManager {
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
+    private Logger logger;
+
+    public UserManager() {
+        userRepository = new UserRepository();
+        logger = new Logger();
+    }
+
+    public UserManager(UserRepository userRepository, Logger logger) {
+        this.userRepository = userRepository;
+        this.logger = logger;
+    }
 
     public String registerUser(String username, String password, String userUsername) {
         if (!isValidString(username) || !isValidString(password)) {
@@ -21,6 +32,7 @@ public class UserManager {
         userRepository.createUser(newUser);
         userUsername = username;
 
+        logger.log("User registered", username);
         return "User registered successfully!";
 
     }
@@ -37,19 +49,13 @@ public class UserManager {
         }
 
         isLoggedIn = true;
+        logger.log("User logged in", username);
         return "Login successful! Welcome, " + username + "!";
     }
 
     public static boolean isValidString(String str) {
         return !(str == null || str.trim().isEmpty());
     }
-
-   // public boolean userExists(String username) {
-
-    //}
-
-
-
 
 
 }

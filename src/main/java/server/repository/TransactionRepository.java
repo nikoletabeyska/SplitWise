@@ -10,6 +10,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.*;
+import server.services.Logger;
 
 import java.util.*;
 
@@ -17,9 +18,12 @@ import java.util.*;
 public class TransactionRepository {
 
     private final EntityManager manager;
+    private final Logger logger;
+
 
     public TransactionRepository(String factoryName) {
         this.manager = Persistence.createEntityManagerFactory(factoryName).createEntityManager();
+        logger = new Logger();
     }
 
     public List<Moneyflow> getAllTransactions(User user)
@@ -33,6 +37,7 @@ public class TransactionRepository {
             List<Moneyflow> relatedTransactions = query.getResultList();
             return relatedTransactions;
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -63,6 +68,7 @@ public class TransactionRepository {
             }
             return toReturn;
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -92,6 +98,7 @@ public class TransactionRepository {
             }
             return toReturn;
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -109,6 +116,7 @@ public class TransactionRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
     }

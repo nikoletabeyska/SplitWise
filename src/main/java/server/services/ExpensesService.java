@@ -17,19 +17,23 @@ public class ExpensesService {
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
+    private final Logger logger;
 
     public ExpensesService() {
         userRepository = new UserRepository();
         groupRepository = new GroupRepository("TestPersistenceUnit");
         transactionRepository = new TransactionRepository("TestPersistenceUnit");
+        logger = new Logger();
+
     }
     public ExpensesService(UserRepository u, GroupRepository g, TransactionRepository t) {
         userRepository = u;
         groupRepository = g;
-        transactionRepository =t;
+        transactionRepository = t;
+        logger = new Logger();
     }
 
-    public String split(String giverName,  String takerName,Double amount, String reason) {
+    public String split(String giverName, String takerName, Double amount, String reason) {
         if (!UserManager.isValidString(giverName)) {
             return "Invalid input. Username is required.";
         }
@@ -39,7 +43,9 @@ public class ExpensesService {
         User giver = userRepository.getUserByUsername(giverName);
         User taker = userRepository.getUserByUsername(takerName);
         transactionRepository.createTransaction(new Moneyflow(giver, taker, amount/2.0, reason, true));
-        return "";
+        logger.log("Split " + amount + " with " + takerName + " for " + reason, giverName);
+
+        return "Successfully split money ";
     }
     public String splitGroup(String giverName,  String[] takersNames,Double amount, String reason) {
         if (!UserManager.isValidString(giverName)) {
@@ -62,6 +68,9 @@ public class ExpensesService {
         {
             transactionRepository.createTransaction(new Moneyflow(giver, taker, splitAmount, reason, true));
         }
+
+        //to fix
+        logger.log("Split " + amount + " with group " + " for " + reason, giverName);
         return "Successfully split money ";
     }
 
@@ -117,6 +126,9 @@ public class ExpensesService {
             Map<User,Double> groupAmount = GetTotalAmountPerUser(user, g);
             result += AppendTransactionCategory(result, g.getName(), groupAmount);
         }
+
+        logger.log("Viewed status of all obligations  ", userName);
+
         return result;
     }
 }

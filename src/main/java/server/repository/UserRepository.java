@@ -7,6 +7,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import server.services.Logger;
+
 import java.util.List;
 
 
@@ -15,9 +17,11 @@ public class UserRepository {
     private static final String PERSISTENCE_UNIT_NAME = "SplitWisePersistenceUnit";
 
     private final EntityManagerFactory entityManagerFactory;
+    private final Logger logger;
 
     public UserRepository() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        logger = new Logger();
     }
 
     public void createUser(User user) {
@@ -35,6 +39,7 @@ public class UserRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         } finally {
             entityManager.close();
@@ -49,6 +54,7 @@ public class UserRepository {
             //retrive entity from the database based on its primary key
             user = entityManager.find(User.class, userId);
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         } finally {
             entityManager.close();
@@ -70,6 +76,7 @@ public class UserRepository {
                 user = resultList.get(0); // Assuming username is unique
             }
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         } finally {
             entityManager.close();
@@ -85,6 +92,7 @@ public class UserRepository {
             Query query = entityManager.createQuery("SELECT u FROM User u", User.class);
             userList = query.getResultList();
         } catch (Exception e) {
+            logger.logError("An error occured  ", e);
             e.printStackTrace();
         } finally {
             entityManager.close();

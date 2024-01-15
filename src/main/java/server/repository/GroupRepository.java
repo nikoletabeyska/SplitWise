@@ -3,6 +3,7 @@ package server.repository;
 import database.model.Group;
 import database.model.User;
 import jakarta.persistence.*;
+import server.services.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +11,14 @@ import java.util.Map;
 public class GroupRepository {
 
     private final EntityManager manager;
+    private final Logger logger;
+
+
 
     public GroupRepository(String repoName) {
         this.manager = Persistence.createEntityManagerFactory(repoName).createEntityManager();
+        logger = new Logger();
+
     }
 
     public void createGroup(Group group) {
@@ -29,6 +35,8 @@ public class GroupRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
+
+            logger.logError("An error occured while creating a group  ", e);
             e.printStackTrace();
         }
     }
@@ -43,6 +51,7 @@ public class GroupRepository {
             query.setParameter("username", user.getUsername());
             return query.getResultList();
         } catch (Exception e) {
+            logger.logError("An error occured while getting all of the groups  ", e);
             e.printStackTrace();
         }
         return null;

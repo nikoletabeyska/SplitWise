@@ -57,9 +57,6 @@ public class ClientHandler implements Runnable {
     }
 
     private String handleCommand(String command) {
-        // Implement command handling logic here
-        // You may need to parse the command and interact with other server components
-        // For example, you can use UserManager, GroupManager, etc.
         String[] parts = command.split("\\s+");
 
         if (parts.length < 1) {
@@ -70,8 +67,14 @@ public class ClientHandler implements Runnable {
 
         switch (commandType) {
             case "register":
+                if (parts.length != 3) {
+                    return "Not enough parameters to register. Username and password required.";
+                }
                 return userManager.registerUser(parts[1], parts[2], userUsername);
             case "login":
+                if (parts.length != 3) {
+                    return "Not enough parameters to register. Username and password required.";
+                }
                 return userManager.loginUser(parts[1], parts[2], isLoggedIn);
             case "add-friend":
                 if (isLoggedIn) {
@@ -79,44 +82,49 @@ public class ClientHandler implements Runnable {
                 } else {
                     return "This command requires log in.";
                 }
-                // return handleAddFriend(parts);
             case "create-group":
                 if (isLoggedIn) {
-                    if(parts.length >=3 ) return "Not enought parameters to create a group";
+                    if (parts.length >= 3) return "Not enought parameters to create a group";
                     //Should always have a following param
                     int nameParamIndex = 1;
                     //Name should be a valid not null strin
-                    if(parts[nameParamIndex] != null && parts[nameParamIndex].trim().isEmpty()== false) {
+                    if (parts[nameParamIndex] != null && parts[nameParamIndex].trim().isEmpty()== false) {
                         ArrayList<String> usersToAdd = new ArrayList<>();
                         for (int i = 2; i < parts.length; i++) {
                             usersToAdd.add(parts[i]);
                         }
                         //Add self to group
                         usersToAdd.add(this.userUsername);
-                        return groupService.createGroup(parts[nameParamIndex],usersToAdd);
+                        return groupService.createGroup(parts[nameParamIndex], usersToAdd, this.userUsername);
                     }
-                    else
-                    {
+                    else {
                         return "Invalid Name";
                     }
                 } else {
                     return "This command requires log in.";
                 }
-                //  return handleCreateGroup(parts);
             case "split":
                 //TODO expects
-                if(parts.length <4) return "Not enough parameters";
-                if(isLoggedIn)
+                if (parts.length < 4) return "Not enough parameters";
+                if (isLoggedIn) {
                     expensesService.split(this.userUsername,parts[3],Double.valueOf(parts[1]),parts[2]);
-
+                } else {
+                    return "This command requires log in.";
+                }
             case "split-group":
-                if(parts.length <4) return "Not enough parameters";
-                if(isLoggedIn)
-                    return expensesService.splitGroup(this.userUsername, Arrays.copyOfRange(parts,3,parts.length),Double.valueOf(parts[1]),parts[2]);
-                return "This command requires log in.";
+                if (parts.length < 4) return "Not enough parameters";
+                if (isLoggedIn) {
+                    return expensesService.splitGroup(this.userUsername, Arrays.copyOfRange(parts, 3, parts.length),
+                        Double.valueOf(parts[1]), parts[2]);
+                } else {
+                    return "This command requires log in.";
+                }
             case "get-status":
-                //  return handleGetStatus(parts);
-                // Add more cases for other commands as needed
+                if (isLoggedIn) {
+                    return expensesService.getStatus(this.userUsername);
+                } else {
+                    return "This command requires log in.";
+                }
             default:
                 return "Unknown command: " + commandType;
         }
