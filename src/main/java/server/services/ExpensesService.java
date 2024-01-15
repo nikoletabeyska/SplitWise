@@ -47,31 +47,26 @@ public class ExpensesService {
 
         return "Successfully split money ";
     }
-    public String splitGroup(String giverName,  String[] takersNames,Double amount, String reason) {
+    public String splitGroup(String giverName, String groupName ,Double amount, String reason) {
+
         if (!UserManager.isValidString(giverName)) {
             return "Invalid input. Username is required.";
         }
         User giver = userRepository.getUserByUsername(giverName);
-        ArrayList<User> takers = new ArrayList<User>();
-        for (String takerName : takersNames)
-        {
-            if (!UserManager.isValidString(takerName)) {
-                return  "Invalid input. Takername is invalid." + takerName;
-            }
-            takers.add(userRepository.getUserByUsername(takerName));
-        }
+        List<User> membersOfGroup=transactionRepository.getWantedGroupMembers(groupName);
+        //ArrayList<User> takers = new ArrayList<User>();
 
 
-        double splitAmount = amount / takers.size();
+        double splitAmount = amount / membersOfGroup.size();
         //If all taker names are valid
-        for  ( User taker : takers)
+        for  ( User member : membersOfGroup)
         {
-            transactionRepository.createTransaction(new Moneyflow(giver, taker, splitAmount, reason, true));
+            transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true));
         }
 
         //to fix
-        logger.log("Split " + amount + " with group " + " for " + reason, giverName);
-        return "Successfully split money ";
+        logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
+        return "Successfully split money.";
     }
 
 
@@ -81,12 +76,6 @@ public class ExpensesService {
         Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
         Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,group);
 
-//        //Make owed money to be negative
-//        for ( User current : owedTo.keySet())
-//        {
-//            owedTo.replace(current, )
-//
-//        }
         owedTo.forEach((muser, amount) -> owedTo.replace(muser,-amount));
 
         // Merge the maps by adding amounts for common users

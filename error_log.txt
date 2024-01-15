@@ -1,0 +1,8 @@
+Exception: java.lang.IllegalArgumentException: Argument [Mihinka] of type [java.lang.String] did not match parameter type [database.model.User (n/a)]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT * FROM Moneyflow t WHERE t.giver = :username or t.taker = :username]
+
+Exception: java.lang.IllegalArgumentException: Argument [Mihinka] of type [java.lang.String] did not match parameter type [database.model.User (n/a)]
+
+Exception: java.lang.IllegalArgumentException: Argument [Mihinka] of type [java.lang.String] did not match parameter type [database.model.User (n/a)]
+

@@ -1,5 +1,6 @@
 package server.repository;
 
+import database.model.*;
 import database.model.Moneyflow;
 import database.model.User;
 import jakarta.persistence.*;
@@ -13,12 +14,14 @@ import java.util.*;
 import org.mockito.Mockito;
 import server.services.FriendshipService;
 
+import static javax.swing.UIManager.put;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionRepositoryTest {
 
     static private TransactionRepository transactionRepository;
     static private EntityManager entityManager;
+    private static Map<String, User> mockUsers;
     @BeforeAll
     static void setUp() {
 
@@ -27,28 +30,42 @@ class TransactionRepositoryTest {
         transactionRepository = new TransactionRepository(persistence_unit);
 
 
+         mockUsers = new HashMap<>()
+                {{
+                        put("Mihinka", new User("Mihinka","12345"));
+                        put("Nikinka", new User("Nikinka","12345"));
+                        put("Tedinko", new User("Tedinko","12345"));
+                        put("Daninko", new User("Daninko","12345"));
+                }};
         //Create
-        User mihinka = new User("Mihinka","12345");
-        User nikinka = new User("Nikinka","12345");
-        User tedinko = new User("Tedinko","12345");
-        User daninko = new User("Daninko","12345");
+
         EntityTransaction transaction=null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
 
-            entityManager.persist(mihinka);
-            entityManager.persist(nikinka);
-            entityManager.persist(tedinko);
-            entityManager.persist(daninko);
+            entityManager.persist(mockUsers.get("Mihinka"));
+            entityManager.persist(mockUsers.get("Tedinko"));
+            entityManager.persist(mockUsers.get("Daninko"));
+            entityManager.persist(mockUsers.get("Nikinka"));
 
+            Moneyflow m1 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Nikinka"), 10, "Mock",true);
+            Moneyflow m2 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 10, "Mock",true);
+            Moneyflow m3 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 20, "Mock",true);
+            Moneyflow m4 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 10, "Mock",true);
 
 
             //Create mock transactions
-            entityManager.persist(new Moneyflow(mihinka,nikinka, 10, "Mock",true));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock",true));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 20, "Mock",true));
-            entityManager.persist(new Moneyflow(mihinka,daninko, 10, "Mock",true));
+            entityManager.persist(m1);
+            entityManager.persist(m2);
+            entityManager.persist(m3);
+            entityManager.persist(m4);
+
+            ArrayList<User> ourGroup = new ArrayList<>();
+            ourGroup.add(mockUsers.get("Mihinka"));
+            ourGroup.add(mockUsers.get("Nikinka"));
+            ourGroup.add(mockUsers.get("Tedinko"));
+            entityManager.persist(new Group("ourGroup",ourGroup));
 
             transaction.commit();
         } catch (Exception e) {
@@ -75,13 +92,9 @@ class TransactionRepositoryTest {
         }
 
     }
-    @Test
-    void getAllTransactions() {
-
-    }
 
     @Test
-    void getOwedMoneyFromIndividuals() {
+    void testGetOwedMoneyFromIndividuals() {
         User userToGet = PrimitiveUserGet("Mihinka");
        Map<User,Double> result = transactionRepository.getOwedMoneyFrom(userToGet,null);
         Map<User,Double> expected = new HashMap<User,Double>()
@@ -93,7 +106,7 @@ class TransactionRepositoryTest {
         assertEquals(result,expected);
     }
     @Test
-    void getOwedMoneyToIndividuals() {
+    void testGetOwedMoneyToIndividuals() {
         User userToGet = PrimitiveUserGet("Daninko");
         Map<User,Double> result = transactionRepository.getOwedMoneyTo(userToGet,null);
         Map<User,Double> expected = new HashMap<User,Double>()
@@ -103,12 +116,21 @@ class TransactionRepositoryTest {
         }};
         assertEquals(expected,result);
     }
-
     @Test
-    void createTransaction() {
-    }
+    void testGetWantedGroupMembers() {
 
-    @Test
-    void closeEntityManagerFactory() {
+        ArrayList<User> ourGroup = new ArrayList<>();
+        ourGroup.add(mockUsers.get("Mihinka"));
+        ourGroup.add(mockUsers.get("Nikinka"));
+        ourGroup.add(mockUsers.get("Tedinko"));
+
+        ArrayList<User> result = (ArrayList<User>) transactionRepository.getWantedGroupMembers("ourGroup");
+        boolean isDifferent=false;
+       for (int i=0;i<ourGroup.size();i++){
+           if(!ourGroup.get(i).equals(result.get(i))){
+               isDifferent=true;
+           }
+       }
+       assertEquals(false,isDifferent);
     }
 }

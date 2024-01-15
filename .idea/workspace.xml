@@ -7,9 +7,10 @@
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,7 @@
       <recent name="database.model" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ExpensesServiceTest.splitGroup">
     <configuration name="JavaFX Inclusion" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
       <module name="Splitwise" />
@@ -83,6 +84,78 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ExpensesServiceTest.split" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Splitwise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server.services" />
+      <option name="MAIN_CLASS_NAME" value="server.services.ExpensesServiceTest" />
+      <option name="METHOD_NAME" value="split" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExpensesServiceTest.splitGroup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Splitwise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server.services" />
+      <option name="MAIN_CLASS_NAME" value="server.services.ExpensesServiceTest" />
+      <option name="METHOD_NAME" value="splitGroup" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TransactionRepositoryTest.testGetAllTransactions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Splitwise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server.repository" />
+      <option name="MAIN_CLASS_NAME" value="server.repository.TransactionRepositoryTest" />
+      <option name="METHOD_NAME" value="testGetAllTransactions" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TransactionRepositoryTest.testGetWantedGroupMembers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Splitwise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server.repository" />
+      <option name="MAIN_CLASS_NAME" value="server.repository.TransactionRepositoryTest" />
+      <option name="METHOD_NAME" value="testGetWantedGroupMembers" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ExpensesServiceTest.splitGroup" />
+        <item itemvalue="JUnit.ExpensesServiceTest.split" />
+        <item itemvalue="JUnit.TransactionRepositoryTest.testGetWantedGroupMembers" />
+        <item itemvalue="JUnit.TransactionRepositoryTest.testGetAllTransactions" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -95,7 +168,7 @@
       <workItem from="1705008166057" duration="3111000" />
       <workItem from="1705011285753" duration="1597000" />
       <workItem from="1705062438516" duration="31378000" />
-      <workItem from="1705239009662" duration="16116000" />
+      <workItem from="1705239009662" duration="26130000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -133,27 +206,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java</url>
-          <line>97</line>
+          <line>110</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java</url>
-          <line>70</line>
+          <line>74</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java</url>
-          <line>64</line>
+          <line>126</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java</url>
-          <line>102</line>
+          <line>164</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java</url>
-          <line>70</line>
+          <line>132</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>

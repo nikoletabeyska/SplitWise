@@ -1,6 +1,7 @@
 package server.services;
 
 import database.model.Group;
+import database.model.Moneyflow;
 import database.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +11,7 @@ import server.repository.GroupRepository;
 import server.repository.TransactionRepository;
 import server.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,10 +34,73 @@ class ExpensesServiceTest {
 
     @Test
     void split() {
+        // Mocking dependencies
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        GroupRepository groupRepository = Mockito.mock(GroupRepository.class);
+        TransactionRepository transactionRepository = Mockito.mock(TransactionRepository.class);
+
+        // Setting up test data
+        String giverName = "Mihi";
+        String takerName = "Niki";
+        Double amount = 100.0;
+        String reason = "Shared expense";
+
+        User giver = new User(giverName,"12345");
+        User taker = new User(takerName,"12345");
+
+        Mockito.when(userRepository.getUserByUsername(giverName)).thenReturn(giver);
+        Mockito.when(userRepository.getUserByUsername(takerName)).thenReturn(taker);
+
+        // Creating an instance of the class that contains the split method (TransactionManager)
+        ExpensesService expensesService = new ExpensesService(userRepository, groupRepository, transactionRepository);
+
+        // Executing the method to be tested
+        String result = expensesService.split(giverName, takerName, amount, reason);
+
+        // Verifying the results
+        assertEquals("Successfully split money ", result);
+
+        // Verifying that the transactionRepository.createTransaction is called with the correct arguments
+        Mockito.verify(transactionRepository, Mockito.times(1)).createTransaction(Mockito.any(Moneyflow.class));
     }
 
     @Test
     void splitGroup() {
+        // Mocking dependencies
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        GroupRepository groupRepository = Mockito.mock(GroupRepository.class);
+        TransactionRepository transactionRepository = Mockito.mock(TransactionRepository.class);
+        Logger logger = Mockito.mock(Logger.class);
+
+        // Setting up test data
+        String giverName = "Mihi";
+        String groupName = "Friends";
+        Double amount = 100.0;
+        String reason = "Shared expense";
+
+        User giver = new User(giverName, "12345");
+        List<User> membersOfGroup = Arrays.asList(
+                new User("User1", "12345"),
+                new User("User2", "12345"),
+                new User("User3", "12345")
+        );
+        Group group=new Group(groupName,membersOfGroup);
+
+        Mockito.when(userRepository.getUserByUsername(giverName)).thenReturn(giver);
+        Mockito.when(transactionRepository.getWantedGroupMembers(groupName)).thenReturn(membersOfGroup);
+
+        // Creating an instance of the class that contains the splitGroup method (ExpensesService)
+        ExpensesService expensesService = new ExpensesService(userRepository, groupRepository, transactionRepository);
+
+        // Executing the method to be tested
+        String result = expensesService.splitGroup(giverName, groupName, amount, reason);
+
+        // Verifying the results
+        assertEquals("Successfully split money.", result);
+
+        // Verifying that the transactionRepository.createTransaction is called with the correct arguments
+        Mockito.verify(transactionRepository, Mockito.times(3)).createTransaction(Mockito.any(Moneyflow.class));
+
     }
 
     @Test

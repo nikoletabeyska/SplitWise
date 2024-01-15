@@ -26,23 +26,6 @@ public class TransactionRepository {
         logger = new Logger();
     }
 
-    public List<Moneyflow> getAllTransactions(User user)
-    {
-        EntityTransaction transaction = null;
-
-        try {
-            Query query = manager.createQuery("SELECT t FROM Moneyflow t WHERE t.giver = :username or t.taker = :username", User.class);
-            query.setParameter("username", user.getUsername());
-
-            List<Moneyflow> relatedTransactions = query.getResultList();
-            return relatedTransactions;
-        } catch (Exception e) {
-            logger.logError("An error occured  ", e);
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
     //Get all active transactions to or from  another user SUMMED in
     //Moneyflow object that is not in the database
@@ -52,7 +35,6 @@ public class TransactionRepository {
     {
         EntityTransaction transaction = null;
         try {
-            //TODO check hot auto-join or simply join
 
             Query query = manager.createQuery(
                     "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
@@ -82,7 +64,6 @@ public class TransactionRepository {
         EntityTransaction transaction = null;
 
         try {
-            //TODO check hot auto-join or simply join
 
             Query query = manager.createQuery(
                     "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
@@ -124,5 +105,15 @@ public class TransactionRepository {
         if (manager != null && manager.isOpen()) {
             manager.close();
         }
+    }
+
+    public List<User> getWantedGroupMembers(String groupName){
+
+        Query query = manager.createQuery(
+                "SELECT g.members FROM Group g WHERE g.name=:groupName",
+                Object[].class);
+        query.setParameter("groupName",groupName);
+        List<User> members = query.getResultList();
+        return members;
     }
 }

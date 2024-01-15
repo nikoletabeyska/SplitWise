@@ -114,8 +114,8 @@ public class ClientHandler implements Runnable {
             case "split-group":
                 if (parts.length < 4) return "Not enough parameters";
                 if (isLoggedIn) {
-                    return expensesService.splitGroup(this.userUsername, Arrays.copyOfRange(parts, 3, parts.length),
-                        Double.valueOf(parts[1]), parts[2]);
+                    return expensesService.splitGroup(this.userUsername, parts[1],
+                        Double.valueOf(parts[2]), parts[3]);
                 } else {
                     return "This command requires log in.";
                 }
