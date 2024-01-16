@@ -1,6 +1,4 @@
 package server.services;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import database.model.Group;
 import database.model.User;
 import server.repository.GroupRepository;
@@ -16,10 +14,10 @@ public class GroupService {
     private UserRepository userRepository;
     private Logger logger;
 
-    public void GroupService() {
-        groupRepository = new GroupRepository("TestPersistenceUnit");
-        userRepository = new UserRepository();
-        logger = new Logger();
+    public GroupService() {
+        this.groupRepository = new GroupRepository("SplitWisePersistenceUnit");
+        this.userRepository = new UserRepository();
+        this.logger = new Logger();
     }
 
     public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
