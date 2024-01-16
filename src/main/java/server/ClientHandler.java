@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-public class ClientHandler implements Runnable {
+public class ClientHandler {
 
     private PrintWriter writer;
     private BufferedReader reader;
@@ -55,11 +55,11 @@ public class ClientHandler implements Runnable {
 //            closeResources();
 //        }
 //    }
-    @Override
+    /*@Override
     public void run()
     {
 
-    }
+    }*/
 
     public String handleCommand(String command) {
         String[] parts = command.split("\\s+");
@@ -120,7 +120,7 @@ public class ClientHandler implements Runnable {
             case "split":
                 if (parts.length < 4) return "Not enough parameters";
                 if (isLoggedIn) {
-                    expensesService.split(this.userUsername,parts[3],Double.valueOf(parts[1]),parts[2]);
+                    return expensesService.split(this.userUsername, parts[3], Double.valueOf(parts[1]), parts[2]);
                 } else {
                     return "This command requires log in.";
                 }
