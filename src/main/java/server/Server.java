@@ -1,6 +1,11 @@
 package server;
 
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import server.services.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,9 +25,15 @@ public class Server {
     public static final int PORT = 7777;
     private static final String SERVER_HOST = "localhost";
     private static Map <SocketChannel, ClientHandler> clients = new HashMap<>();
+    private static final String PERSISTENCE_UNIT_NAME = "SplitWisePersistenceUnit";
+    private static EntityManagerFactory entityManagerFactory = null;
+    private static EntityManager manager = null;
+    public static Logger logger = new Logger();
 
     public static void main(String[] args) throws IOException {
         //startServer();
+        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        manager = entityManagerFactory.createEntityManager();
         startServerChannel();
     }
     public static void startServerChannel() {
@@ -35,7 +46,7 @@ public class Server {
             Selector selector = Selector.open();
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
-            System.out.println("Server started on port 8080...");
+            System.out.println("Server started on port 7777...");
 
             while (true) {
                 selector.select();
@@ -63,7 +74,7 @@ public class Server {
         SocketChannel clientChannel = serverSocketChannel.accept();
         clientChannel.configureBlocking(false);
         clientChannel.register(selector, SelectionKey.OP_READ);
-        clients.put(clientChannel,new ClientHandler());
+        clients.put(clientChannel,new ClientHandler(manager));
 
         System.out.println("Accepted connection from " + clientChannel.getRemoteAddress());
     }
@@ -80,7 +91,9 @@ public class Server {
             byte[] data = new byte[buffer.remaining()];
             buffer.get(data);
             String receivedMessage = new String(data);
-
+            if(receivedMessage.equals("get-status")){
+                System.out.println("Neshto");
+            }
             //TODO fix bug
             //Response WORKING
             //System.out.println("Received message from client: " + receivedMessage);
@@ -124,9 +137,9 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected: " + socket.getInetAddress());
 
-                ClientHandler clientHandler = new ClientHandler();
+                ClientHandler clientHandler = new ClientHandler(manager);
                 //start new thread for every client
-                new Thread(clientHandler).start();
+                //new Thread(clientHandler).start();
 
             } catch (IOException e) {
                 e.printStackTrace();

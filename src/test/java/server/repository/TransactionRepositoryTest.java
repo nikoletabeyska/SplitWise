@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 import org.mockito.Mockito;
 import server.services.FriendshipService;
+import server.services.Logger;
 
 import static javax.swing.UIManager.put;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,9 +28,7 @@ class TransactionRepositoryTest {
 
         String persistence_unit = "TestPersistenceUnit";
         entityManager = Persistence.createEntityManagerFactory(persistence_unit).createEntityManager();
-        transactionRepository = new TransactionRepository(persistence_unit);
-
-
+        transactionRepository = new TransactionRepository(entityManager,new Logger());
          mockUsers = new HashMap<>()
                 {{
                         put("Mihinka", new User("Mihinka","12345"));

@@ -2,6 +2,7 @@ package server.services;
 
 import database.model.Friendship;
 import database.model.User;
+import server.Server;
 import server.repository.FriendshipRepository;
 import server.repository.UserRepository;
 
@@ -10,18 +11,10 @@ import java.util.List;
 public class FriendshipService {
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
-    private final Logger logger;
-
-    public FriendshipService() {
-        userRepository = new UserRepository();
-        friendshipRepository = new FriendshipRepository();
-        logger = new Logger();
-    }
 
     public FriendshipService(UserRepository userRepository, FriendshipRepository friendshipRepository) {
         this.userRepository = userRepository;
         this.friendshipRepository = friendshipRepository;
-        this.logger = new Logger();
     }
 
     public String addFriend(String userUsername, String friendUsername) {
@@ -37,7 +30,7 @@ public class FriendshipService {
         Friendship friendship = new Friendship(user, friend);
         friendshipRepository.addNewFriendship(friendship);
 
-        logger.log("Added " + friendUsername + " as a friend.", userUsername);
+        Server.logger.log("Added " + friendUsername + " as a friend.", userUsername);
 
         return "User " + friendUsername + " has been successfully added to your friends list.";
 
@@ -55,7 +48,7 @@ public class FriendshipService {
             }
         }
 
-        logger.log("Viewed friend list.", userUsername);
+        Server.logger.log("Viewed friend list.", userUsername);
         return friendsList;
     }
 

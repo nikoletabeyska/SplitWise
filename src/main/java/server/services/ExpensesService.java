@@ -3,6 +3,7 @@ package server.services;
 import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
+import server.Server;
 import server.repository.FriendshipRepository;
 import server.repository.GroupRepository;
 import server.repository.TransactionRepository;
@@ -17,20 +18,11 @@ public class ExpensesService {
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
-    private final Logger logger;
 
-    public ExpensesService() {
-        userRepository = new UserRepository();
-        groupRepository = new GroupRepository("TestPersistenceUnit");
-        transactionRepository = new TransactionRepository("TestPersistenceUnit");
-        logger = new Logger();
-
-    }
     public ExpensesService(UserRepository u, GroupRepository g, TransactionRepository t) {
         userRepository = u;
         groupRepository = g;
         transactionRepository = t;
-        logger = new Logger();
     }
 
     public String split(String giverName, String takerName, Double amount, String reason) {
@@ -43,7 +35,7 @@ public class ExpensesService {
         User giver = userRepository.getUserByUsername(giverName);
         User taker = userRepository.getUserByUsername(takerName);
         transactionRepository.createTransaction(new Moneyflow(giver, taker, amount/2.0, reason, true));
-        logger.log("Split " + amount + " with " + takerName + " for " + reason, giverName);
+        Server.logger.log("Split " + amount + " with " + takerName + " for " + reason, giverName);
 
         return "Successfully split money ";
     }
@@ -65,7 +57,7 @@ public class ExpensesService {
         }
 
         //to fix
-        logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
+        Server.logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
         return "Successfully split money.";
     }
 
@@ -110,13 +102,14 @@ public class ExpensesService {
         result += AppendTransactionCategory(result, "Individuals",mergedMap);
         result += "Groups";
         List<Group> groups = groupRepository.getAllGroups(user);
+
         for(Group g : groups)
         {
             Map<User,Double> groupAmount = GetTotalAmountPerUser(user, g);
             result += AppendTransactionCategory(result, g.getName(), groupAmount);
         }
 
-        logger.log("Viewed status of all obligations  ", userName);
+        Server.logger.log("Viewed status of all obligations  ", userName);
 
         return result;
     }
