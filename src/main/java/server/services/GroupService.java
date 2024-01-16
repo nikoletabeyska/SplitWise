@@ -39,14 +39,19 @@ public class GroupService {
 
     }
 
-    public String getGroups(User participant) {
-        List<Group> groups = groupRepository.getAllGroups(participant);
+    public String getGroups(String participant) {
+        User user = userRepository.getUserByUsername(participant);
+        List<Group> groups = groupRepository.getAllGroups(user);
         String groupList = "Groups: \n";
-        for (Group g : groups) {
-            groupList += g.getName() + "\n";
+        if (groups == null) {
+            groupList += "You are not currently a member of any groups.";
+        } else {
+            for (Group g : groups) {
+                groupList += g.getName() + "\n";
+            }
         }
 
-        logger.log("Viewed groups ", participant.getUsername());
+        logger.log("Viewed groups ", participant);
         return groupList;
     }
 

@@ -138,6 +138,13 @@ public class ClientHandler {
                 } else {
                     return "This command requires log in.";
                 }
+            case "get-groups":
+                if (isLoggedIn) {
+                    return groupService.getGroups(this.userUsername);
+                } else {
+                    return "This command requires log in.";
+                }
+
             default:
                 return "Unknown command: " + commandType;
         }

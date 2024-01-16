@@ -76,44 +76,9 @@ class GroupServiceTest {
         User participant = new User("testUser", "1999");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         when(groupRepository.getAllGroups(participant)).thenReturn(Arrays.asList(new Group("Group1"), new Group("Group2")));
 
-        String result = groupService.getGroups(participant);
+        String result = groupService.getGroups("testUser");
 
         // Add assertions based on the expected output or behavior
         assertTrue(result.contains("Groups:"));
