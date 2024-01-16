@@ -31,7 +31,7 @@ public class UserManager {
         userRepository.createUser(newUser);
         userUsername = username;
 
-        Server.logger.log("User registered", username);
+        Logger.log("User registered", username);
         return "User registered successfully!";
 
     }
@@ -49,7 +49,7 @@ public class UserManager {
             result.put("Invalid username or password. Please try again", false);
             return  result;
         }
-        Server.logger.log("User logged in", username);
+        Logger.log("User logged in", username);
         result.put("Login successful! Welcome, " + username + "!", true);
 
         return result;

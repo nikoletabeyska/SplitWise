@@ -28,7 +28,7 @@ class TransactionRepositoryTest {
 
         String persistence_unit = "TestPersistenceUnit";
         entityManager = Persistence.createEntityManagerFactory(persistence_unit).createEntityManager();
-        transactionRepository = new TransactionRepository(entityManager,new Logger());
+        transactionRepository = new TransactionRepository(entityManager);
          mockUsers = new HashMap<>()
                 {{
                         put("Mihinka", new User("Mihinka","12345"));

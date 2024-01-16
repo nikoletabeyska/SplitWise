@@ -31,7 +31,7 @@ public class GroupRepository extends RepositoryBase {
                 transaction.rollback();
             }
 
-            Server.logger.logError("An error occured while creating a group  ", e);
+            Logger.logError("An error occured while creating a group  ", e);
             e.printStackTrace();
         }
     }
@@ -46,7 +46,7 @@ public class GroupRepository extends RepositoryBase {
             query.setParameter("username", user.getUsername());
             return query.getResultList();
         } catch (Exception e) {
-            Server.logger.logError("An error occured while getting all of the groups  ", e);
+            Logger.logError("An error occured while getting all of the groups  ", e);
             e.printStackTrace();
         }
         List<Group> emptyList = new ArrayList<>();

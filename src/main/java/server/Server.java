@@ -26,14 +26,16 @@ public class Server {
     private static final String SERVER_HOST = "localhost";
     private static Map <SocketChannel, ClientHandler> clients = new HashMap<>();
     private static final String PERSISTENCE_UNIT_NAME = "SplitWisePersistenceUnit";
+
     private static EntityManagerFactory entityManagerFactory = null;
-    private static EntityManager manager = null;
-    public static Logger logger = new Logger();
+    //static entity manager used for a global connection with the database
+    public static EntityManager manager = null;
 
     public static void main(String[] args) throws IOException {
-        //startServer();
+        // establish connection with the database
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         manager = entityManagerFactory.createEntityManager();
+        //Start accepting user commands
         startServerChannel();
     }
     public static void startServerChannel() {
@@ -94,15 +96,8 @@ public class Server {
             if(receivedMessage.equals("get-status")){
                 System.out.println("Neshto");
             }
-            //TODO fix bug
-            //Response WORKING
-            //System.out.println("Received message from client: " + receivedMessage);
-           // sendResponse(clientChannel,receivedMessage,buffer);
-            //Respone NOT WORKING
             ClientHandler handlerForConnection = clients.get(clientChannel);
             sendResponse(clientChannel, handlerForConnection.handleCommand(receivedMessage), buffer);
-
-
         }
     }
 
@@ -122,53 +117,6 @@ public class Server {
             System.out.println("Client disconnected");
         }
     }
-
-    private static void startServer() throws IOException {
-
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        ServerSocket serverSocket = serverSocketChannel.socket();
-        serverSocket.bind(new InetSocketAddress(SERVER_HOST,PORT));
-
-        System.out.println("Server is running...");
-
-
-        while (true) {
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected: " + socket.getInetAddress());
-
-                ClientHandler clientHandler = new ClientHandler(manager);
-                //start new thread for every client
-                //new Thread(clientHandler).start();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (serverSocket != null) {
-                        serverSocket.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    private static void handleClient(Socket clientSocket) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-            String message;
-            while ((message = reader.readLine()) != null) {
-                System.out.println("Received from client: " + message);
-                // Echo the message back to the client
-                clientSocket.getOutputStream().write((message + "\n").getBytes());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
 
 

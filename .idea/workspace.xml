@@ -5,23 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3c361495-a2cd-44d3-ac2e-add2d34e0d2a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/error_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/error_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/operations_log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/FriendshipRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/FriendshipRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/RepositoryBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/RepositoryBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/FriendshipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/FriendshipService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/TransactionRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -249,7 +247,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>94</line>
+          <line>96</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -259,12 +257,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>82</line>
+          <line>84</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>73</line>
+          <line>75</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>

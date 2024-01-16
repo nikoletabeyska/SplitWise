@@ -46,7 +46,7 @@ public class TransactionRepository extends RepositoryBase{
             }
             return toReturn;
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -75,7 +75,7 @@ public class TransactionRepository extends RepositoryBase{
             }
             return toReturn;
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -93,7 +93,7 @@ public class TransactionRepository extends RepositoryBase{
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
     }

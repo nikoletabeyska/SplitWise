@@ -35,7 +35,7 @@ public class ExpensesService {
         User giver = userRepository.getUserByUsername(giverName);
         User taker = userRepository.getUserByUsername(takerName);
         transactionRepository.createTransaction(new Moneyflow(giver, taker, amount/2.0, reason, true));
-        Server.logger.log("Split " + amount + " with " + takerName + " for " + reason, giverName);
+        Logger.log("Split " + amount + " with " + takerName + " for " + reason, giverName);
 
         return "Successfully split money ";
     }
@@ -57,7 +57,7 @@ public class ExpensesService {
         }
 
         //to fix
-        Server.logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
+        Logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
         return "Successfully split money.";
     }
 
@@ -109,7 +109,7 @@ public class ExpensesService {
             result += AppendTransactionCategory(result, g.getName(), groupAmount);
         }
 
-        Server.logger.log("Viewed status of all obligations  ", userName);
+        Logger.log("Viewed status of all obligations  ", userName);
 
         return result;
     }

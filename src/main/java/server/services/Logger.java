@@ -10,10 +10,10 @@ public class Logger {
     private static final String OPERATION_LOG_FILE = "operations_log.txt";
     private static final String ERROR_LOG_FILE = "error_log.txt";
     private static final int MAX_BUFFER_SIZE = 100;
-    private final StringBuilder logBuffer = new StringBuilder();
-    private final StringBuilder errorBuffer = new StringBuilder();
+    private static final StringBuilder logBuffer = new StringBuilder();
+    private static final StringBuilder errorBuffer = new StringBuilder();
 
-    public synchronized void log(String message, String user) {
+    public static synchronized void log(String message, String user) {
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         String logEntry = '[' + timestamp + ']' + " " + message + " by " + user;
 
@@ -23,7 +23,7 @@ public class Logger {
         }
     }
 
-    public synchronized void logError(String errorMessage, Exception exception) {
+    public static synchronized void logError(String errorMessage, Exception exception) {
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         //String errorEntry = "[" + timestamp + "] ERROR by " + username + ": " + errorMessage;
         String errorEntry = "";
@@ -38,7 +38,7 @@ public class Logger {
         }
     }
 
-    private void flushBuffer(String filename, StringBuilder buffer) {
+    private static void flushBuffer(String filename, StringBuilder buffer) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename, true))) {
             writer.print(buffer.toString());
             buffer.setLength(0); // Clear the buffer

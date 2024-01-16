@@ -33,7 +33,7 @@ public class UserRepository extends RepositoryBase {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
     }
@@ -45,7 +45,7 @@ public class UserRepository extends RepositoryBase {
             //retrive entity from the database based on its primary key
             user = manager.find(User.class, userId);
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return user;
@@ -63,7 +63,7 @@ public class UserRepository extends RepositoryBase {
                 user = resultList.get(0); // Assuming username is unique
             }
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return user;
@@ -76,7 +76,7 @@ public class UserRepository extends RepositoryBase {
             Query query = manager.createQuery("SELECT u FROM User u", User.class);
             userList = query.getResultList();
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
 

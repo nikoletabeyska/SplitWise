@@ -32,7 +32,7 @@ public class FriendshipRepository extends  RepositoryBase  {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            Server.logger.logError("An error occured while adding new friend ", e);
+            Logger.logError("An error occured while adding new friend ", e);
             e.printStackTrace();
         }
     }
@@ -45,7 +45,7 @@ public class FriendshipRepository extends  RepositoryBase  {
             query.setParameter("user", user);
             List<Friendship> resultList = query.getResultList();
         } catch (Exception e) {
-            Server.logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return friendships;

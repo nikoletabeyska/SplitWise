@@ -30,7 +30,7 @@ public class FriendshipService {
         Friendship friendship = new Friendship(user, friend);
         friendshipRepository.addNewFriendship(friendship);
 
-        Server.logger.log("Added " + friendUsername + " as a friend.", userUsername);
+        Logger.log("Added " + friendUsername + " as a friend.", userUsername);
 
         return "User " + friendUsername + " has been successfully added to your friends list.";
 
@@ -48,7 +48,7 @@ public class FriendshipService {
             }
         }
 
-        Server.logger.log("Viewed friend list.", userUsername);
+        Logger.log("Viewed friend list.", userUsername);
         return friendsList;
     }
 

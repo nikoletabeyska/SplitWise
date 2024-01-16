@@ -31,7 +31,7 @@ public class GroupService {
             groupMembers.add(user);
         }
         groupRepository.createGroup(new Group(groupName, groupMembers.stream().toList()));
-        Server.logger.log("Created new group " + groupName, userUsername);
+        Logger.log("Created new group " + groupName, userUsername);
         return "Group " + groupName + " has been successfully created.";
 
     }
@@ -42,7 +42,7 @@ public class GroupService {
         for (Group g : groups) {
             groupList += g.getName() + "\n";
         }
-        Server.logger.log("Viewed groups ", participant.getUsername());
+        Logger.log("Viewed groups ", participant.getUsername());
         return groupList;
     }
 
