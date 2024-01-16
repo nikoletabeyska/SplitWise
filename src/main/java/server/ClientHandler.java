@@ -144,6 +144,12 @@ public class ClientHandler {
                 } else {
                     return "This command requires log in.";
                 }
+            case "get-friends":
+                if (isLoggedIn) {
+                    return friendshipService.getAllFriendsList(this.userUsername);
+                } else {
+                    return "This command requires log in.";
+                }
 
             default:
                 return "Unknown command: " + commandType;

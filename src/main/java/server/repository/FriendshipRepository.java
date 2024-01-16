@@ -56,7 +56,7 @@ public class FriendshipRepository {
             Query query = entityManager.createQuery("SELECT f FROM Friendship f WHERE f.firstFriend = :user OR f.secondFriend = :user", Friendship.class);
             query.setParameter("user", user);
 
-            List<Friendship> resultList = query.getResultList();
+            friendships = query.getResultList();
 
         } catch (Exception e) {
             logger.logError("An error occured  ", e);

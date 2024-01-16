@@ -5,7 +5,9 @@ import database.model.User;
 import server.repository.FriendshipRepository;
 import server.repository.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FriendshipService {
     private final UserRepository userRepository;
@@ -47,16 +49,24 @@ public class FriendshipService {
         User user = userRepository.getUserByUsername(userUsername);
         List<Friendship> friendships = friendshipRepository.getAllFriendships(user);
         String friendsList = "Friends: \n";
-        for (Friendship f : friendships) {
-            if (f.getFirstFriend().equals(user)) {
-                friendsList += f.getSecondFriend().getUsername() + "\n";
-            } else {
-                friendsList += f.getFirstFriend().getUsername() + "\n";
+        Set<String> friends = new HashSet<>();
+        if (friendships == null) {
+            friendsList += "You have no friends.";
+        } else {
+            for (Friendship f : friendships) {
+                if (f.getFirstFriend().equals(user)) {
+                    friends.add(f.getSecondFriend().getUsername() + "\n");
+                } else {
+                    friends.add(f.getFirstFriend().getUsername() + "\n");
+                }
+            }
+            for (String s : friends) {
+                friendsList += s;
             }
         }
 
         logger.log("Viewed friend list.", userUsername);
         return friendsList;
-    }
 
+    }
 }
