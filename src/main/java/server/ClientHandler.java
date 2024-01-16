@@ -120,7 +120,7 @@ public class ClientHandler {
             case "split":
                 if (parts.length < 4) return "Not enough parameters";
                 if (isLoggedIn) {
-                    return expensesService.split(this.userUsername, parts[3], Double.valueOf(parts[1]), parts[2]);
+                    return expensesService.split(this.userUsername, parts[2], Double.valueOf(parts[1]), parts[3]);
                 } else {
                     return "This command requires log in.";
                 }

@@ -111,7 +111,7 @@ public class TransactionRepository {
 
         Query query = manager.createQuery(
                 "SELECT g.members FROM Group g WHERE g.name=:groupName",
-                Object[].class);
+                User.class);
         query.setParameter("groupName",groupName);
         List<User> members = query.getResultList();
         return members;
