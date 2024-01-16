@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class ClientHandler implements Runnable {
 
@@ -28,12 +29,12 @@ public class ClientHandler implements Runnable {
     private String userUsername;
 
     public ClientHandler() {
-//        this.userManager = new UserManager();
-//        this.friendshipService = new FriendshipService();
-//        this.groupService = new GroupService();
-//        this.expensesService = new ExpensesService();
-//        this.isLoggedIn = false;
-//        this.userUsername = null;
+       this.userManager = new UserManager();
+       this.friendshipService = new FriendshipService();
+       this.groupService = new GroupService();
+       this.expensesService = new ExpensesService();
+       this.isLoggedIn = false;
+       this.userUsername = null;
     }
 
 //    @Override
@@ -76,10 +77,19 @@ public class ClientHandler implements Runnable {
                 }
                 return userManager.registerUser(parts[1], parts[2], userUsername);
             case "login":
+                //.attach(user);
                 if (parts.length != 3) {
                     return "Not enough parameters to register. Username and password required.";
                 }
-                return userManager.loginUser(parts[1], parts[2], isLoggedIn);
+                Map<String,Boolean> result = userManager.loginUser(parts[1],parts[2]);
+                Map.Entry<String, Boolean> singleEntry = result.entrySet().iterator().next();
+                String key = singleEntry.getKey();
+                Boolean value = singleEntry.getValue();
+                if (value) {
+                    this.isLoggedIn = true;
+                    this.userUsername = parts[1];
+                }
+                return key;
             case "add-friend":
                 if (isLoggedIn) {
                     return friendshipService.addFriend(userUsername, parts[1]);
@@ -88,7 +98,7 @@ public class ClientHandler implements Runnable {
                 }
             case "create-group":
                 if (isLoggedIn) {
-                    if (parts.length >= 3) return "Not enought parameters to create a group";
+                    if (parts.length <= 3) return "Not enought parameters to create a group";
                     //Should always have a following param
                     int nameParamIndex = 1;
                     //Name should be a valid not null strin

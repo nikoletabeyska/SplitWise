@@ -1,7 +1,12 @@
 package server.services;
 
+import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.User;
 import server.repository.UserRepository;
+
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
 
@@ -37,20 +42,23 @@ public class UserManager {
 
     }
 
-    public String loginUser(String username, String password, boolean isLoggedIn) {
+    public Map<String, Boolean> loginUser(String username, String password) {
+        Map<String, Boolean> result = new HashMap<>();
         if (!isValidString(username) || !isValidString(password)) {
-            return "Invalid input. Username and password are required.";
+            result.put("Invalid input. Username and password are required.", false);
+            return result;
         }
 
         User user = userRepository.getUserByUsername(username);
 
         if (user == null || !user.getPassword().equals(password)) {
-            return "Invalid username or password. Please try again.";
+            result.put("Invalid username or password. Please try again", false);
+            return  result;
         }
-
-        isLoggedIn = true;
         logger.log("User logged in", username);
-        return "Login successful! Welcome, " + username + "!";
+        result.put("Login successful! Welcome, " + username + "!", true);
+
+        return result;
     }
 
     public static boolean isValidString(String str) {
