@@ -45,7 +45,7 @@ public class ClientHandler {
 
         this.userManager = new UserManager(userRepository);
         this.friendshipService = new FriendshipService(userRepository,friendshipRepository);
-        this.groupService = new GroupService(userRepository,groupRepository);
+        this.groupService = new GroupService(userRepository,groupRepository, friendshipRepository);
         this.expensesService = new ExpensesService(userRepository,groupRepository,transactionRepository);
         this.isLoggedIn = false;
         this.userUsername = null;
