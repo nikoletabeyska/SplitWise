@@ -77,16 +77,16 @@ public class ExpensesService {
                 mergedMap.merge(muser, amount, Double::sum));
         return  mergedMap;
     }
-    public String AppendTransactionCategory(String result, String categoryName, Map<User,Double> map)
+    public String AppendTransactionCategory( String categoryName, Map<User,Double> map)
     {
-        result += "To/From" + categoryName + "\n";
+        String result = "To/From    " + categoryName + "\n";
         for (Map.Entry<User, Double> entry : map.entrySet()) {
             User muser = entry.getKey();
             Double amount = entry.getValue();
             if(entry.getValue()<0)
-                result += "     " + "You owe " + muser.getUsername() + ": " + (-amount)+ "\n";
+                result += "     " + "You owe    " + muser.getUsername() + ":    " + (-amount)+ "\n";
             else
-                result += "     "  + muser.getUsername() + " owes you: " + amount+ "\n";
+                result += "     "  + muser.getUsername() + "    owes you:   " + amount+ "\n";
 
         };
         return result;
@@ -99,14 +99,14 @@ public class ExpensesService {
         //Get all transaction in which user is part of
         String result = "";
         Map<User,Double> mergedMap = GetTotalAmountPerUser(user,null);
-        result += AppendTransactionCategory(result, "Individuals",mergedMap);
+        result += AppendTransactionCategory( "Individuals",mergedMap);
         result += "Groups";
         List<Group> groups = groupRepository.getAllGroups(user);
 
         for(Group g : groups)
         {
             Map<User,Double> groupAmount = GetTotalAmountPerUser(user, g);
-            result += AppendTransactionCategory(result, g.getName(), groupAmount);
+            result += AppendTransactionCategory(g.getName(), groupAmount);
         }
 
         Logger.log("Viewed status of all obligations  ", userName);

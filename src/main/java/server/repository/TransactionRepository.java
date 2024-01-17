@@ -32,12 +32,24 @@ public class TransactionRepository extends RepositoryBase{
         EntityTransaction transaction = null;
         try {
 
-            Query query = manager.createQuery(
-                    "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
-                            "AND  (:group IS NULL OR t.group = :group) AND isActive=true  group by t.giver",
-                    Object[].class);
-            query.setParameter("username", user.getUsername());
-            query.setParameter("group", group);
+            Query query = null;
+            if(group == null)
+            {
+
+                query = manager.createQuery(
+                        "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
+                                "AND  t.group IS NULL AND isActive=true  group by t.giver",
+                        Object[].class);
+                query.setParameter("username", user.getUsername());
+            }
+            else {
+                query = manager.createQuery(
+                        "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
+                                "AND   t.group = :group AND isActive=true  group by t.giver",
+                        Object[].class);
+                query.setParameter("username", user.getUsername());
+                query.setParameter("group", group);
+            }
 
             Map<User,Double> toReturn = new HashMap<>();
             for (Object[] o : (List<Object[]>)query.getResultList())
@@ -61,12 +73,24 @@ public class TransactionRepository extends RepositoryBase{
 
         try {
 
-            Query query = manager.createQuery(
-                    "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
-                            "AND (:group IS NULL OR t.group = :group) AND isActive=true  group by t.taker",
-                    Object[].class);
-            query.setParameter("username", user.getUsername());
-            query.setParameter("group", group);
+            Query query=null;
+            if(group == null)
+            {
+                query = manager.createQuery(
+                        "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
+                                "AND t.group IS NULL AND isActive=true  group by t.taker",
+                        Object[].class);
+                query.setParameter("username", user.getUsername());
+            }
+            else
+            {
+                query = manager.createQuery(
+                        "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
+                                "AND  t.group = :group AND isActive=true  group by t.taker",
+                        Object[].class);
+                query.setParameter("username", user.getUsername());
+                query.setParameter("group", group);
+            }
 
             Map<User,Double> toReturn = new HashMap<>();
             for (Object[] o : (List<Object[]>)query.getResultList())

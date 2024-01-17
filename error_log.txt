@@ -56,3 +56,5 @@ JOIN u.userGroups ug
 JOIN ug.group g
 WHERE u.username = :username]
 
+Exception: java.lang.IllegalArgumentException: Could not locate named parameter [group], expecting one of [username]
+

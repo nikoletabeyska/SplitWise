@@ -79,3 +79,47 @@
 [2024-01-17 15:47:12] User logged in by m
 [2024-01-17 15:47:37] Created new group newgroup by m
 [2024-01-17 15:48:08] Split 15.0 with group newgroup for reason by m
+[2024-01-17 15:55:39] User registered by m
+[2024-01-17 15:55:39] User registered by n
+[2024-01-17 15:55:39] User registered by k
+[2024-01-17 15:55:39] User logged in by m
+[2024-01-17 15:55:40] Created new group newgroup by m
+[2024-01-17 15:55:40] Split 15.0 with group newgroup for reason by m
+[2024-01-17 15:55:40] Split 10.0 with n for reason by m
+[2024-01-17 15:55:47] Viewed status of all obligations   by m
+[2024-01-17 16:02:17] User registered by m
+[2024-01-17 16:02:17] User registered by n
+[2024-01-17 16:02:17] User registered by k
+[2024-01-17 16:02:17] User logged in by m
+[2024-01-17 16:02:17] Created new group newgroup by m
+[2024-01-17 16:02:17] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:02:17] Split 10.0 with n for reason by m
+[2024-01-17 16:02:19] Viewed status of all obligations   by m
+[2024-01-17 16:02:56] User registered by m
+[2024-01-17 16:02:56] User registered by n
+[2024-01-17 16:02:56] User registered by k
+[2024-01-17 16:02:56] User logged in by m
+[2024-01-17 16:03:00] Created new group newgroup by m
+[2024-01-17 16:03:01] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:10] User registered by m
+[2024-01-17 16:05:10] User registered by n
+[2024-01-17 16:05:10] User registered by k
+[2024-01-17 16:05:10] User logged in by m
+[2024-01-17 16:05:10] Created new group newgroup by m
+[2024-01-17 16:05:10] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:58] User registered by m
+[2024-01-17 16:05:58] User registered by n
+[2024-01-17 16:05:58] User registered by k
+[2024-01-17 16:05:58] User logged in by m
+[2024-01-17 16:05:58] Created new group newgroup by m
+[2024-01-17 16:05:58] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:59] Split 10.0 with n for reason by m
+[2024-01-17 16:08:01] Viewed status of all obligations   by m
+[2024-01-17 16:09:04] User registered by m
+[2024-01-17 16:09:04] User registered by n
+[2024-01-17 16:09:04] User registered by k
+[2024-01-17 16:09:04] User logged in by m
+[2024-01-17 16:09:04] Created new group newgroup by m
+[2024-01-17 16:09:04] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:09:04] Split 10.0 with n for reason by m
+[2024-01-17 16:09:05] Viewed status of all obligations   by m
