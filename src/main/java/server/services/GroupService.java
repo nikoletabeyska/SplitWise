@@ -37,14 +37,16 @@ public class GroupService {
             if (friendships == null) {
                 return "You have no friends to create group. Add the passed parameters to your friends list.";
             }
-            for (Friendship f : friendships) {
-                if (f.getFirstFriend().equals(username) || f.getSecondFriend().equals(username)) {
-                    groupMembers.add(user);
-
-                } else {
-                    return "User with username " + username + " is not your friend. Add him to your friends list to create this group";
-                }
-            }
+            //TODO consider business logic for friendship requirements
+            groupMembers.add(user);
+//            for (Friendship f : friendships) {
+//                if (f.getFirstFriend().equals(username) || f.getSecondFriend().equals(username)) {
+//                    groupMembers.add(user);
+//
+//                } else {
+//                    return "User with username " + username + " is not your friend. Add him to your friends list to create this group";
+//                }
+//            }
         }
         if (groupMembers.size() < 3) {
             return "Not enough members to create a group!";

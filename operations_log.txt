@@ -18,3 +18,157 @@
 [2024-01-17 01:52:07] Split 100.0 with Niki for Shared expense by Mihi
 [2024-01-17 01:52:07] Viewed status of all obligations   by Mihi
 [2024-01-17 01:52:07] Viewed status of all obligations   by Mihi
+[2024-01-17 11:56:28] User registered by mihi
+[2024-01-17 11:56:42] User registered by tedinkoto
+[2024-01-17 11:56:56] User registered by thirdUser
+[2024-01-17 11:57:12] User logged in by mihi
+[2024-01-17 11:57:35] Split 10.0 with tedinkoto for splittingtest by mihi
+[2024-01-17 11:58:44] Created new group mockinggroup by mihi
+[2024-01-17 11:59:33] Split 15.0 with group mockinggroup for splittingtestgroup by mihi
+[2024-01-17 12:06:07] User registered by mihinkata
+[2024-01-17 12:06:22] User logged in by mihinkata
+[2024-01-17 12:10:27] User logged in by mihinkata
+[2024-01-17 12:10:45] Viewed status of all obligations   by mihinkata
+[2024-01-17 12:12:41] User registered by tedinkoto
+[2024-01-17 12:12:53] User registered by mihinkata
+[2024-01-17 12:13:13] User registered by thirdUser
+[2024-01-17 12:13:23] User logged in by mihinkata
+[2024-01-17 12:13:41] Split 10.0 with tedinkoto for testing by mihinkata
+[2024-01-17 12:14:19] Created new group testinggroup by mihinkata
+[2024-01-17 12:14:39] Split 15.0 with group testinggroup for testinggroup by mihinkata
+[2024-01-17 12:14:51] Viewed status of all obligations   by mihinkata
+[2024-01-17 12:49:34] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 12:49:34] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 12:49:34] Viewed status of all obligations   by Mihi
+[2024-01-17 12:49:34] Viewed status of all obligations   by Mihi
+[2024-01-17 13:23:42] Added mihi as a friend. by niki
+[2024-01-17 13:23:42] Viewed friend list. by mihi
+[2024-01-17 13:23:45] Created new group TestGroup by s
+[2024-01-17 13:23:45] Viewed groups  by testUser
+[2024-01-17 14:30:16] User registered by m
+[2024-01-17 14:30:19] User logged in by m
+[2024-01-17 14:30:31] User registered by n
+[2024-01-17 14:30:43] User registered by k
+[2024-01-17 14:31:09] Created new group newgroup by m
+[2024-01-17 14:31:36] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:31:48] Split 10.0 with n for reason by m
+[2024-01-17 14:31:57] Viewed status of all obligations   by m
+[2024-01-17 14:37:14] User registered by m
+[2024-01-17 14:37:14] User registered by n
+[2024-01-17 14:37:14] User registered by k
+[2024-01-17 14:37:14] User logged in by m
+[2024-01-17 14:37:14] Created new group newgroup by m
+[2024-01-17 14:37:20] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:37:47] User registered by m
+[2024-01-17 14:37:47] User registered by n
+[2024-01-17 14:37:47] User registered by k
+[2024-01-17 14:37:47] User logged in by m
+[2024-01-17 14:37:47] Created new group newgroup by m
+[2024-01-17 14:37:47] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:37:47] Split 10.0 with n for reason by m
+[2024-01-17 14:41:10] Viewed status of all obligations   by m
+[2024-01-17 15:41:09] User registered by m
+[2024-01-17 15:41:09] User registered by n
+[2024-01-17 15:41:09] User registered by k
+[2024-01-17 15:41:58] User registered by m
+[2024-01-17 15:41:58] User registered by n
+[2024-01-17 15:42:05] User registered by k
+[2024-01-17 15:47:12] User registered by m
+[2024-01-17 15:47:12] User registered by n
+[2024-01-17 15:47:12] User registered by k
+[2024-01-17 15:47:12] User logged in by m
+[2024-01-17 15:47:37] Created new group newgroup by m
+[2024-01-17 15:48:08] Split 15.0 with group newgroup for reason by m
+[2024-01-17 15:55:39] User registered by m
+[2024-01-17 15:55:39] User registered by n
+[2024-01-17 15:55:39] User registered by k
+[2024-01-17 15:55:39] User logged in by m
+[2024-01-17 15:55:40] Created new group newgroup by m
+[2024-01-17 15:55:40] Split 15.0 with group newgroup for reason by m
+[2024-01-17 15:55:40] Split 10.0 with n for reason by m
+[2024-01-17 15:55:47] Viewed status of all obligations   by m
+[2024-01-17 16:02:17] User registered by m
+[2024-01-17 16:02:17] User registered by n
+[2024-01-17 16:02:17] User registered by k
+[2024-01-17 16:02:17] User logged in by m
+[2024-01-17 16:02:17] Created new group newgroup by m
+[2024-01-17 16:02:17] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:02:17] Split 10.0 with n for reason by m
+[2024-01-17 16:02:19] Viewed status of all obligations   by m
+[2024-01-17 16:02:56] User registered by m
+[2024-01-17 16:02:56] User registered by n
+[2024-01-17 16:02:56] User registered by k
+[2024-01-17 16:02:56] User logged in by m
+[2024-01-17 16:03:00] Created new group newgroup by m
+[2024-01-17 16:03:01] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:10] User registered by m
+[2024-01-17 16:05:10] User registered by n
+[2024-01-17 16:05:10] User registered by k
+[2024-01-17 16:05:10] User logged in by m
+[2024-01-17 16:05:10] Created new group newgroup by m
+[2024-01-17 16:05:10] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:58] User registered by m
+[2024-01-17 16:05:58] User registered by n
+[2024-01-17 16:05:58] User registered by k
+[2024-01-17 16:05:58] User logged in by m
+[2024-01-17 16:05:58] Created new group newgroup by m
+[2024-01-17 16:05:58] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:05:59] Split 10.0 with n for reason by m
+[2024-01-17 16:08:01] Viewed status of all obligations   by m
+[2024-01-17 16:09:04] User registered by m
+[2024-01-17 16:09:04] User registered by n
+[2024-01-17 16:09:04] User registered by k
+[2024-01-17 16:09:04] User logged in by m
+[2024-01-17 16:09:04] Created new group newgroup by m
+[2024-01-17 16:09:04] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:09:04] Split 10.0 with n for reason by m
+[2024-01-17 16:09:05] Viewed status of all obligations   by m
+[2024-01-17 16:29:19] User registered by m
+[2024-01-17 16:29:19] User registered by n
+[2024-01-17 16:29:19] User registered by k
+[2024-01-17 16:29:20] User logged in by m
+[2024-01-17 16:29:20] Created new group newgroup by m
+[2024-01-17 16:29:20] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:29:20] Split 10.0 with n for reason by m
+[2024-01-17 16:29:30] Viewed status of all obligations   by m
+[2024-01-17 16:29:48] User logged in by n
+[2024-01-17 16:29:51] Viewed status of all obligations   by n
+[2024-01-17 16:35:52] User registered by m
+[2024-01-17 16:35:52] User registered by n
+[2024-01-17 16:35:52] User registered by k
+[2024-01-17 16:35:52] User logged in by m
+[2024-01-17 16:35:52] Created new group newgroup by m
+[2024-01-17 16:35:52] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:35:52] Split 10.0 with n for reason by m
+[2024-01-17 16:35:52] Viewed status of all obligations   by m
+[2024-01-17 16:35:52] User logged in by n
+[2024-01-17 16:36:24] Split 2.5 with m for reason by n
+[2024-01-17 16:36:28] Viewed status of all obligations   by n
+[2024-01-17 16:37:38] User registered by m
+[2024-01-17 16:37:38] User registered by n
+[2024-01-17 16:37:38] User registered by k
+[2024-01-17 16:37:38] User logged in by m
+[2024-01-17 16:37:38] Created new group newgroup by m
+[2024-01-17 16:37:38] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:37:38] Split 10.0 with n for reason by m
+[2024-01-17 16:37:38] Viewed status of all obligations   by m
+[2024-01-17 16:37:38] User logged in by n
+[2024-01-17 16:37:38] Split 2.5 with m for reason by n
+[2024-01-17 16:37:46] Viewed status of all obligations   by n
+[2024-01-17 16:38:27] User registered by m
+[2024-01-17 16:38:27] User registered by n
+[2024-01-17 16:38:27] User registered by k
+[2024-01-17 16:38:28] User logged in by m
+[2024-01-17 16:38:28] Created new group newgroup by m
+[2024-01-17 16:38:28] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:38:28] Split 10.0 with n for reason by m
+[2024-01-17 16:38:28] Viewed status of all obligations   by m
+[2024-01-17 16:38:28] User logged in by n
+[2024-01-17 16:38:28] Split 2.5 with m for reason by n
+[2024-01-17 16:38:28] Split 1.24 with group newgroup for reason by n
+[2024-01-17 16:45:46] User logged in by m
+[2024-01-17 16:45:50] Viewed status of all obligations   by m
+[2024-01-17 16:49:08] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 16:49:08] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 16:49:08] Viewed status of all obligations   by Mihi
+[2024-01-17 16:49:08] Viewed status of all obligations   by Mihi

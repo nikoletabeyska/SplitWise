@@ -45,15 +45,15 @@ public class ExpensesService {
             return "Invalid input. Username is required.";
         }
         User giver = userRepository.getUserByUsername(giverName);
+
         List<User> membersOfGroup=transactionRepository.getWantedGroupMembers(groupName);
-        //ArrayList<User> takers = new ArrayList<User>();
-
-
-        double splitAmount = amount / membersOfGroup.size();
+        membersOfGroup.remove(userRepository.getUserByUsername(giverName));
+        Group ourGroup = transactionRepository.getWantedGroup(groupName);
+        double splitAmount = amount / (membersOfGroup.size()+1);
         //If all taker names are valid
         for  ( User member : membersOfGroup)
         {
-            transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true));
+            transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true, ourGroup));
         }
 
         //to fix
@@ -62,11 +62,25 @@ public class ExpensesService {
     }
 
 
+
+    //Get owed money to and from another user from a GROUP or INDIVIDUALLY (if group is null)
+    // and return the sum of the transcations.
+    //E.g m owes n 10, and n owes m  -> so get-status for m yield m owes n 5 (10 -5)(the sum)
     public Map<User,Double> GetTotalAmountPerUser(User user, Group group)
     {
+        Map<User,Double> owedFrom ;
+        Map<User,Double> owedTo ;
         //Individual transactions
-        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
-        Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,group);
+        if(group == null)
+        {
+            owedFrom = transactionRepository.getOwedMoneyFrom(user);
+            owedTo = transactionRepository.getOwedMoneyTo(user);
+        }
+        else
+        {
+            owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
+            owedTo =transactionRepository.getOwedMoneyTo(user,group);
+        }
 
         owedTo.forEach((muser, amount) -> owedTo.replace(muser,-amount));
 
@@ -77,16 +91,16 @@ public class ExpensesService {
                 mergedMap.merge(muser, amount, Double::sum));
         return  mergedMap;
     }
-    public String AppendTransactionCategory(String result, String categoryName, Map<User,Double> map)
+    public String AppendTransactionCategory( String categoryName, Map<User,Double> map)
     {
-        result += "To/From" + categoryName + "\n";
+        String result = "To/From    " + categoryName + "\n";
         for (Map.Entry<User, Double> entry : map.entrySet()) {
             User muser = entry.getKey();
             Double amount = entry.getValue();
             if(entry.getValue()<0)
-                result += "     " + "You owe " + muser.getUsername() + ": " + (-amount)+ "\n";
+                result += "     " + "You owe    " + muser.getUsername() + ":    " + (-amount)+ "\n";
             else
-                result += "     "  + muser.getUsername() + " owes you: " + amount+ "\n";
+                result += "     "  + muser.getUsername() + "    owes you:   " + amount+ "\n";
 
         };
         return result;
@@ -99,14 +113,14 @@ public class ExpensesService {
         //Get all transaction in which user is part of
         String result = "";
         Map<User,Double> mergedMap = GetTotalAmountPerUser(user,null);
-        result += AppendTransactionCategory(result, "Individuals",mergedMap);
+        result += AppendTransactionCategory( "Individuals",mergedMap);
         result += "Groups";
         List<Group> groups = groupRepository.getAllGroups(user);
 
         for(Group g : groups)
         {
             Map<User,Double> groupAmount = GetTotalAmountPerUser(user, g);
-            result += AppendTransactionCategory(result, g.getName(), groupAmount);
+            result += AppendTransactionCategory(g.getName(), groupAmount);
         }
 
         Logger.log("Viewed status of all obligations  ", userName);

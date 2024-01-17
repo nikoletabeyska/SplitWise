@@ -1,0 +1,230 @@
+@startuml
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1379209310 { 
+   	label=services
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ExpensesService1178841431[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ExpensesService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   groupRepository: GroupRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   transactionRepository: TransactionRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: UserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ AppendTransactionCategory(categoryName: String, map: Map&lt;User, Double&gt;): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ GetTotalAmountPerUser(user: User, group: Group): Map&lt;User, Double&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getStatus(userName: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ split(giverName: String, takerName: String, amount: Double, reason: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ splitGroup(giverName: String, groupName: String, amount: Double, reason: String): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FriendshipService1178841431[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FriendshipService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   friendshipRepository: FriendshipRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: UserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addFriend(userUsername: String, friendUsername: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAllFriendsList(userUsername: String): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GroupService1178841431[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GroupService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   friendshipRepository: FriendshipRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   groupRepository: GroupRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: UserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ createGroup(groupName: String, users: ArrayList&lt;String&gt;, userUsername: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getGroups(participant: User): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Logger1178841431[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Logger</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- flushBuffer(filename: String, buffer: StringBuilder)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ log(message: String, user: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ logError(errorMessage: String, exception: Exception)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserManager1178841431[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   userRepository: UserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ isValidString(str: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ loginUser(username: String, password: String): Map&lt;String, Boolean&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ registerUser(username: String, password: String, userUsername: String): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1950800714 { 
+   	label=repository
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   FriendshipRepository385331925[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FriendshipRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addNewFriendship(friendship: Friendship)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createNewFriendship(from: User, to: User): Friendship</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAllFriendships(user: User): List&lt;Friendship&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GroupRepository385331925[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GroupRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ createGroup(group: Group)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAllGroups(user: User): List&lt;Group&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TransactionRepository385331925[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TransactionRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ closeEntityManagerFactory()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createTransaction(moneyflowTransaction: Moneyflow)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOwedMoneyFrom(user: User): Map&lt;User, Double&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOwedMoneyFrom(user: User, group: Group): Map&lt;User, Double&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOwedMoneyTo(user: User): Map&lt;User, Double&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOwedMoneyTo(user: User, group: Group): Map&lt;User, Double&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getWantedGroup(groupName: String): Group</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getWantedGroupMembers(groupName: String): List&lt;User&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- totalAmountByUser(objectList: List&lt;Object[]&gt;): Map&lt;User, Double&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserRepository385331925[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ closeEntityManagerFactory()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createUser(user: User)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserById(userId: Long): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserByUsername(username: String): User</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_905826493 { 
+   	label=server
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ClientHandler905826493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ClientHandler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   friendshipRepository: FriendshipRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   groupRepository: GroupRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isLoggedIn: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   reader: BufferedReader [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   transactionRepository: TransactionRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: UserRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userUsername: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   writer: PrintWriter [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ handleCommand(command: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- hashPassword(password: String): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Server905826493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Server</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- handleAcceptableEvent(serverSocketChannel: ServerSocketChannel, selector: Selector)</TD></TR>
+<TR><TD ALIGN="LEFT" >- handleReadableEvent(clientChannel: SocketChannel)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >- sendResponse(clientChannel: SocketChannel, message: String, buffer: ByteBuffer)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ startServerChannel()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+ClientHandler905826493 -> FriendshipService1178841431[];
+ClientHandler905826493 -> GroupService1178841431[];
+ExpensesService1178841431 -> GroupRepository385331925[];
+ExpensesService1178841431 -> TransactionRepository385331925[];
+ExpensesService1178841431 -> UserRepository385331925[];
+FriendshipService1178841431 -> FriendshipRepository385331925[];
+FriendshipService1178841431 -> UserManager1178841431[];
+FriendshipService1178841431 -> UserRepository385331925[];
+GroupService1178841431 -> FriendshipRepository385331925[];
+GroupService1178841431 -> GroupRepository385331925[];
+GroupService1178841431 -> UserManager1178841431[];
+GroupService1178841431 -> UserRepository385331925[];
+Server905826493 -> ClientHandler905826493[];
+UserManager1178841431 -> UserRepository385331925[];
+    
+}
+@enduml

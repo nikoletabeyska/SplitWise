@@ -16,3 +16,45 @@ Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticExcep
 
 Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
 
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.RuntimeException: Simulating an error
+
+Exception: java.lang.NullPointerException: Cannot invoke "jakarta.persistence.Query.setParameter(String, Object)" because "query" is null
+
+Exception: java.lang.NullPointerException: Cannot invoke "jakarta.persistence.Query.setParameter(String, Object)" because "query" is null
+
+Exception: java.lang.RuntimeException: Simulating an error
+
+Exception: java.lang.NullPointerException: Cannot invoke "jakarta.persistence.Query.setParameter(String, Object)" because "query" is null
+
+Exception: java.lang.NullPointerException: Cannot invoke "jakarta.persistence.Query.setParameter(String, Object)" because "query" is null
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :userid in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :userid in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :userid in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.sqm.InterpretationException: Error interpreting query [SELECT DISTINCT g
+FROM User u
+JOIN u.userGroups ug
+JOIN ug.group g
+WHERE u.username = :username]; this may indicate a semantic (user query) problem or a bug in the parser [SELECT DISTINCT g
+FROM User u
+JOIN u.userGroups ug
+JOIN ug.group g
+WHERE u.username = :username]
+
+Exception: java.lang.IllegalArgumentException: Could not locate named parameter [group], expecting one of [username]
+

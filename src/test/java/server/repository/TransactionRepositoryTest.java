@@ -127,4 +127,18 @@ class TransactionRepositoryTest {
         Set<User> resultSet = new HashSet<>(result);
         assertEquals(true,groupSet.equals(resultSet));
     }
+
+    @Test
+    void getWantedGroup() {
+        Set<User> groupSet = new HashSet<>();
+        groupSet.add(mockUsers.get("Mihinka"));
+        groupSet.add(mockUsers.get("Nikinka"));
+        groupSet.add(mockUsers.get("Tedinko"));
+        ArrayList<User> result = (ArrayList<User>) transactionRepository.getWantedGroupMembers("ourGroup");
+        Set<User> resultSet = new HashSet<>(result);
+        Group resultGroup=transactionRepository.getWantedGroup("ourGroup");
+        assertEquals(true, "ourGroup"==resultGroup.getName());
+        assertEquals(true, groupSet.equals(resultSet));
+
+    }
 }

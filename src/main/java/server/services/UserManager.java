@@ -33,7 +33,7 @@ public class UserManager {
         userUsername = username;
 
         Logger.log("User registered", username);
-        return "User registered successfully!";
+        return "User registered successfully! Please login using your credentials.";
 
     }
 
