@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/error_log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/operations_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/operations_log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" afterDir="false" />
@@ -198,7 +197,7 @@
       <workItem from="1705239009662" duration="33941000" />
       <workItem from="1705440257156" duration="7302000" />
       <workItem from="1705452540928" duration="6215000" />
-      <workItem from="1705493036830" duration="6736000" />
+      <workItem from="1705493036830" duration="8726000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -236,7 +235,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java</url>
-          <line>66</line>
+          <line>72</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -258,11 +257,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/client/src/Client.java</url>
           <line>32</line>
           <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java</url>

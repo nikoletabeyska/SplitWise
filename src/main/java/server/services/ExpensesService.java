@@ -62,11 +62,25 @@ public class ExpensesService {
     }
 
 
+
+    //Get owed money to and from another user from a GROUP or INDIVIDUALLY (if group is null)
+    // and return the sum of the transcations.
+    //E.g m owes n 10, and n owes m  -> so get-status for m yield m owes n 5 (10 -5)(the sum)
     public Map<User,Double> GetTotalAmountPerUser(User user, Group group)
     {
+        Map<User,Double> owedFrom ;
+        Map<User,Double> owedTo ;
         //Individual transactions
-        Map<User,Double> owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
-        Map<User,Double> owedTo =transactionRepository.getOwedMoneyTo(user,group);
+        if(group == null)
+        {
+            owedFrom = transactionRepository.getOwedMoneyFrom(user);
+            owedTo = transactionRepository.getOwedMoneyTo(user);
+        }
+        else
+        {
+            owedFrom = transactionRepository.getOwedMoneyFrom(user,group);
+            owedTo =transactionRepository.getOwedMoneyTo(user,group);
+        }
 
         owedTo.forEach((muser, amount) -> owedTo.replace(muser,-amount));
 

@@ -123,3 +123,46 @@
 [2024-01-17 16:09:04] Split 15.0 with group newgroup for reason by m
 [2024-01-17 16:09:04] Split 10.0 with n for reason by m
 [2024-01-17 16:09:05] Viewed status of all obligations   by m
+[2024-01-17 16:29:19] User registered by m
+[2024-01-17 16:29:19] User registered by n
+[2024-01-17 16:29:19] User registered by k
+[2024-01-17 16:29:20] User logged in by m
+[2024-01-17 16:29:20] Created new group newgroup by m
+[2024-01-17 16:29:20] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:29:20] Split 10.0 with n for reason by m
+[2024-01-17 16:29:30] Viewed status of all obligations   by m
+[2024-01-17 16:29:48] User logged in by n
+[2024-01-17 16:29:51] Viewed status of all obligations   by n
+[2024-01-17 16:35:52] User registered by m
+[2024-01-17 16:35:52] User registered by n
+[2024-01-17 16:35:52] User registered by k
+[2024-01-17 16:35:52] User logged in by m
+[2024-01-17 16:35:52] Created new group newgroup by m
+[2024-01-17 16:35:52] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:35:52] Split 10.0 with n for reason by m
+[2024-01-17 16:35:52] Viewed status of all obligations   by m
+[2024-01-17 16:35:52] User logged in by n
+[2024-01-17 16:36:24] Split 2.5 with m for reason by n
+[2024-01-17 16:36:28] Viewed status of all obligations   by n
+[2024-01-17 16:37:38] User registered by m
+[2024-01-17 16:37:38] User registered by n
+[2024-01-17 16:37:38] User registered by k
+[2024-01-17 16:37:38] User logged in by m
+[2024-01-17 16:37:38] Created new group newgroup by m
+[2024-01-17 16:37:38] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:37:38] Split 10.0 with n for reason by m
+[2024-01-17 16:37:38] Viewed status of all obligations   by m
+[2024-01-17 16:37:38] User logged in by n
+[2024-01-17 16:37:38] Split 2.5 with m for reason by n
+[2024-01-17 16:37:46] Viewed status of all obligations   by n
+[2024-01-17 16:38:27] User registered by m
+[2024-01-17 16:38:27] User registered by n
+[2024-01-17 16:38:27] User registered by k
+[2024-01-17 16:38:28] User logged in by m
+[2024-01-17 16:38:28] Created new group newgroup by m
+[2024-01-17 16:38:28] Split 15.0 with group newgroup for reason by m
+[2024-01-17 16:38:28] Split 10.0 with n for reason by m
+[2024-01-17 16:38:28] Viewed status of all obligations   by m
+[2024-01-17 16:38:28] User logged in by n
+[2024-01-17 16:38:28] Split 2.5 with m for reason by n
+[2024-01-17 16:38:28] Split 1.24 with group newgroup for reason by n
