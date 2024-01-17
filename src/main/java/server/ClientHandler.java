@@ -156,6 +156,14 @@ public class ClientHandler {
                 } else {
                     return "This command requires log in.";
                 }
+            case "logout":
+                if (isLoggedIn) {
+                    this.isLoggedIn = false;
+                    this.userUsername = null;
+                    return "You have successfully logged out.";
+                } else {
+                    return "This command requires log in.";
+                }
             default:
                 return "Unknown command: " + commandType;
         }
