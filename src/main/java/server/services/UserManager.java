@@ -2,6 +2,7 @@ package server.services;
 
 import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.User;
+import org.mindrot.jbcrypt.BCrypt;
 import server.repository.UserRepository;
 
 
@@ -51,7 +52,7 @@ public class UserManager {
 
         User user = userRepository.getUserByUsername(username);
 
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
             result.put("Invalid username or password. Please try again", false);
             return  result;
         }
