@@ -1,7 +1,10 @@
 package server.services;
+import com.mysql.cj.conf.ConnectionUrlParser;
+import database.model.Friendship;
 import database.model.Group;
 import database.model.User;
 import server.Server;
+import server.repository.FriendshipRepository;
 import server.repository.GroupRepository;
 import server.repository.UserRepository;
 
@@ -13,10 +16,12 @@ import java.util.Set;
 public class GroupService {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
-    public GroupService( UserRepository userRepository, GroupRepository groupRepository)
+    private FriendshipRepository friendshipRepository;
+    public GroupService( UserRepository userRepository, GroupRepository groupRepository, FriendshipRepository friendshipRepository)
     {
         this.groupRepository = groupRepository;
         this.userRepository = userRepository;
+        this.friendshipRepository = friendshipRepository;
     }
     public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
@@ -28,12 +33,25 @@ public class GroupService {
             if (user == null) {
                 return "User with username " + username + " does not exist.";
             }
-            groupMembers.add(user);
+            List<Friendship> friendships = friendshipRepository.getAllFriendships(userRepository.getUserByUsername(userUsername));
+            if (friendships == null) {
+                return "You have no friends to create group. Add the passed parameters to your friends list.";
+            }
+            for (Friendship f : friendships) {
+                if (f.getFirstFriend().equals(username) || f.getSecondFriend().equals(username)) {
+                    groupMembers.add(user);
+
+                } else {
+                    return "User with username " + username + " is not your friend. Add him to your friends list to create this group";
+                }
+            }
+        }
+        if (groupMembers.size() < 3) {
+            return "Not enough members to create a group!";
         }
         groupRepository.createGroup(new Group(groupName, groupMembers.stream().toList()));
         Logger.log("Created new group " + groupName, userUsername);
         return "Group " + groupName + " has been successfully created.";
-
     }
 
     public String getGroups(User participant) {

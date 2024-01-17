@@ -43,7 +43,7 @@ public class FriendshipRepository extends  RepositoryBase  {
         try {
             Query query = manager.createQuery("SELECT f FROM Friendship f WHERE f.firstFriend = :user OR f.secondFriend = :user", Friendship.class);
             query.setParameter("user", user);
-            List<Friendship> resultList = query.getResultList();
+            friendships = query.getResultList();
         } catch (Exception e) {
             Logger.logError("An error occured  ", e);
             e.printStackTrace();

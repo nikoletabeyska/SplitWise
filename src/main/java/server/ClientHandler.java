@@ -16,6 +16,8 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.security.SecureRandom;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class ClientHandler {
 
@@ -43,7 +45,7 @@ public class ClientHandler {
 
         this.userManager = new UserManager(userRepository);
         this.friendshipService = new FriendshipService(userRepository,friendshipRepository);
-        this.groupService = new GroupService(userRepository,groupRepository);
+        this.groupService = new GroupService(userRepository,groupRepository, friendshipRepository);
         this.expensesService = new ExpensesService(userRepository,groupRepository,transactionRepository);
         this.isLoggedIn = false;
         this.userUsername = null;
@@ -87,7 +89,11 @@ public class ClientHandler {
                 if (parts.length != 3) {
                     return "Not enough parameters to register. Username and password required.";
                 }
-                return userManager.registerUser(parts[1], parts[2], userUsername);
+                // Generate a random salt for each user
+                String hashedPassword = hashPassword(parts[2]);
+                return userManager.registerUser(parts[1], hashedPassword, userUsername);
+                //return userManager.registerUser(parts[1], hashedPassword, salt, userUsername);
+                //return userManager.registerUser(parts[1], parts[2], userUsername);
             case "login":
                 //.attach(user);
                 if (parts.length != 3) {
@@ -150,6 +156,14 @@ public class ClientHandler {
                 } else {
                     return "This command requires log in.";
                 }
+            case "logout":
+                if (isLoggedIn) {
+                    this.isLoggedIn = false;
+                    this.userUsername = null;
+                    return "You have successfully logged out.";
+                } else {
+                    return "This command requires log in.";
+                }
             default:
                 return "Unknown command: " + commandType;
         }
@@ -157,6 +171,12 @@ public class ClientHandler {
         // For simplicity, let's just echo the received command back to the client
         //System.out.println("Received command from client: " + command);
         //out.println("Server response: " + command);
+    }
+
+    private static String hashPassword(String password) {
+        // Generate a random salt and hash the password with BCrypt
+        String salt = BCrypt.gensalt();
+        return BCrypt.hashpw(password, salt);
     }
 
 }
