@@ -97,7 +97,7 @@ public class ClientHandler {
             case "login":
                 //.attach(user);
                 if (parts.length != 3) {
-                    return "Not enough parameters to register. Username and password required.";
+                    return "Not enough parameters to login. Username and password required.";
                 }
                 Map<String,Boolean> result = userManager.loginUser(parts[1],parts[2]);
                 Map.Entry<String, Boolean> singleEntry = result.entrySet().iterator().next();
@@ -161,6 +161,20 @@ public class ClientHandler {
                     this.isLoggedIn = false;
                     this.userUsername = null;
                     return "You have successfully logged out.";
+                } else {
+                    return "This command requires log in.";
+                }
+            case "pay": // pay 10 miki
+                if (parts.length != 3) return "Wrong count parameters";
+                if (isLoggedIn) {
+                    return expensesService.pay(this.userUsername, Double.valueOf(parts[1]), parts[2]);
+                } else {
+                    return "This command requires log in.";
+                }
+            case "pay-group": // pay 10 koko
+                if (parts.length != 3) return "Wrong count parameters";
+                if (isLoggedIn) {
+                    return expensesService.payGroup(this.userUsername, Double.valueOf(parts[1]), parts[2]);
                 } else {
                     return "This command requires log in.";
                 }
