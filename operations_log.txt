@@ -45,3 +45,37 @@
 [2024-01-17 13:23:42] Viewed friend list. by mihi
 [2024-01-17 13:23:45] Created new group TestGroup by s
 [2024-01-17 13:23:45] Viewed groups  by testUser
+[2024-01-17 14:30:16] User registered by m
+[2024-01-17 14:30:19] User logged in by m
+[2024-01-17 14:30:31] User registered by n
+[2024-01-17 14:30:43] User registered by k
+[2024-01-17 14:31:09] Created new group newgroup by m
+[2024-01-17 14:31:36] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:31:48] Split 10.0 with n for reason by m
+[2024-01-17 14:31:57] Viewed status of all obligations   by m
+[2024-01-17 14:37:14] User registered by m
+[2024-01-17 14:37:14] User registered by n
+[2024-01-17 14:37:14] User registered by k
+[2024-01-17 14:37:14] User logged in by m
+[2024-01-17 14:37:14] Created new group newgroup by m
+[2024-01-17 14:37:20] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:37:47] User registered by m
+[2024-01-17 14:37:47] User registered by n
+[2024-01-17 14:37:47] User registered by k
+[2024-01-17 14:37:47] User logged in by m
+[2024-01-17 14:37:47] Created new group newgroup by m
+[2024-01-17 14:37:47] Split 15.0 with group newgroup for reason by m
+[2024-01-17 14:37:47] Split 10.0 with n for reason by m
+[2024-01-17 14:41:10] Viewed status of all obligations   by m
+[2024-01-17 15:41:09] User registered by m
+[2024-01-17 15:41:09] User registered by n
+[2024-01-17 15:41:09] User registered by k
+[2024-01-17 15:41:58] User registered by m
+[2024-01-17 15:41:58] User registered by n
+[2024-01-17 15:42:05] User registered by k
+[2024-01-17 15:47:12] User registered by m
+[2024-01-17 15:47:12] User registered by n
+[2024-01-17 15:47:12] User registered by k
+[2024-01-17 15:47:12] User logged in by m
+[2024-01-17 15:47:37] Created new group newgroup by m
+[2024-01-17 15:48:08] Split 15.0 with group newgroup for reason by m

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="SplitwiseServer:jar" />
+      <artifact name="ClientModule:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,10 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Splitwise_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Splitwise_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/error_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/operations_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +199,7 @@
       <workItem from="1705239009662" duration="33941000" />
       <workItem from="1705440257156" duration="7302000" />
       <workItem from="1705452540928" duration="6215000" />
-      <workItem from="1705493036830" duration="199000" />
+      <workItem from="1705493036830" duration="5428000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -259,29 +261,29 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="60" />
+          <url>file://$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/repository/GroupRepository.java</url>
           <line>42</line>
-          <option name="timeStamp" value="61" />
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="63" />
+          <url>file://$PROJECT_DIR$/src/test/java/server/repository/GroupRepositoryTest.java</url>
+          <line>111</line>
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/Server.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="64" />
+          <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/repository/TransactionRepository.java</url>
-          <line>115</line>
-          <option name="timeStamp" value="65" />
+          <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

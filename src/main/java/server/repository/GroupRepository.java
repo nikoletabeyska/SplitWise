@@ -38,13 +38,19 @@ public class GroupRepository extends RepositoryBase {
     public List<Group> getAllGroups(User user) {
         EntityTransaction transaction = null;
         try {
-            //TODO check hot auto-join or simply join
 
+            //TODO write an SQL query to cover this case and not filter groups here
             Query query = manager.createQuery(
-                    "SELECT g FROM Group g WHERE :username in g.members  ",
+                    "SELECT g FROM Group g",
                     Group.class);
-            query.setParameter("username", user.getUsername());
-            return query.getResultList();
+            List<Group> groups = query.getResultList();
+            groups.removeIf(x -> !x.getMembers().contains(user));
+            return groups;
+
+
+
+           // query.setParameter("userid", user.getId());
+            //return query.getResultList();
         } catch (Exception e) {
             Logger.logError("An error occured while getting all of the groups  ", e);
             e.printStackTrace();

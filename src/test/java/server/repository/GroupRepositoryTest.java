@@ -2,16 +2,17 @@
 package server.repository;
 
 import database.model.Group;
+import database.model.Moneyflow;
 import database.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import server.services.Logger;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -22,11 +23,58 @@ class GroupRepositoryTest {
     private EntityManager entityManager;
     private EntityTransaction transaction;
 
+    private Map<String, User> mockUsers;
     @BeforeEach
     void setUp() {
-        entityManager = mock(EntityManager.class);
-        transaction = mock(EntityTransaction.class);
+
+        String persistence_unit = "TestPersistenceUnit";
+        entityManager = Persistence.createEntityManagerFactory(persistence_unit).createEntityManager();
         groupRepository = new GroupRepository(entityManager);
+        mockUsers = new HashMap<>()
+        {{
+            put("Mihinka", new User("Mihinka","12345"));
+            put("Nikinka", new User("Nikinka","12345"));
+            put("Tedinko", new User("Tedinko","12345"));
+            put("Daninko", new User("Daninko","12345"));
+        }};
+        //Create
+
+        EntityTransaction transaction=null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            entityManager.persist(mockUsers.get("Mihinka"));
+            entityManager.persist(mockUsers.get("Tedinko"));
+            entityManager.persist(mockUsers.get("Daninko"));
+            entityManager.persist(mockUsers.get("Nikinka"));
+
+            Moneyflow m1 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Nikinka"), 10, "Mock",true);
+            Moneyflow m2 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 10, "Mock",true);
+            Moneyflow m3 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 20, "Mock",true);
+            Moneyflow m4 = new Moneyflow(mockUsers.get("Mihinka"),mockUsers.get("Daninko"), 10, "Mock",true);
+
+
+            //Create mock transactions
+            entityManager.persist(m1);
+            entityManager.persist(m2);
+            entityManager.persist(m3);
+            entityManager.persist(m4);
+
+            ArrayList<User> ourGroup = new ArrayList<>();
+            ourGroup.add(mockUsers.get("Mihinka"));
+            ourGroup.add(mockUsers.get("Nikinka"));
+            ourGroup.add(mockUsers.get("Tedinko"));
+            entityManager.persist(new Group("ourGroup",ourGroup));
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
     }
 
     @Test
@@ -60,36 +108,14 @@ class GroupRepositoryTest {
 
     @Test
     void getAllGroups_Success() {
-        User user = new User("testUser", "1");
-        Query query = mock(Query.class);
-
-        //when(entityManager.createQuery(any(String.class), eq(Group.class))).thenReturn((TypedQuery<Group>) query);
-        when(query.setParameter(any(String.class), any())).thenReturn(query);
-        when(query.getResultList()).thenReturn(Collections.singletonList(new Group("TestGroup", Collections.emptyList())));
-
-        List<Group> groups = groupRepository.getAllGroups(user);
+        List<Group> groups = groupRepository.getAllGroups(mockUsers.get("Mihinka"));
         assertEquals(1, groups.size());
-        verify(entityManager, times(1)).createQuery(any(String.class), eq(Group.class));
-        verify(query, times(1)).setParameter(any(String.class), eq(user.getUsername()));
-        verify(query, times(1)).getResultList();
-        //verify(logger, never()).logError(anyString(), any(Throwable.class));
+
     }
 
     @Test
     void getAllGroups_Failure() {
-        User user = new User("testUser", "1");
-        Query query = mock(Query.class);
-
-        //when(entityManager.createQuery(any(String.class), eq(Group.class))).thenReturn((TypedQuery<Group>) query);
-        when(query.setParameter(any(String.class), any())).thenReturn(query);
-        when(query.getResultList()).thenThrow(new RuntimeException("Simulating an error"));
-
-        List<Group> groups = groupRepository.getAllGroups(user);
-
+        List<Group> groups = groupRepository.getAllGroups(mockUsers.get("Daninko"));
         assertEquals(0, groups.size());
-        verify(entityManager, times(1)).createQuery(any(String.class), eq(Group.class));
-        verify(query, times(1)).setParameter(any(String.class), eq(user.getUsername()));
-        verify(query, times(1)).getResultList();
-        //verify(logger, times(1)).logError(anyString(), any(Throwable.class));
     }
 }
