@@ -1,8 +1,4 @@
-package client;
 
-
-import database.model.Group;
-import server.ClientHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
