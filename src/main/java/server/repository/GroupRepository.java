@@ -8,6 +8,7 @@ import server.Server;
 import server.services.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -36,27 +37,17 @@ public class GroupRepository extends RepositoryBase {
         }
     }
     public List<Group> getAllGroups(User user) {
-        EntityTransaction transaction = null;
         try {
-
-            //TODO write an SQL query to cover this case and not filter groups here
             Query query = manager.createQuery(
-                    "SELECT g FROM Group g",
-                    Group.class);
-            List<Group> groups = query.getResultList();
-            groups.removeIf(x -> !x.getMembers().contains(user));
-            return groups;
-
-
-
-           // query.setParameter("userid", user.getId());
-            //return query.getResultList();
+                "SELECT g FROM Group g JOIN g.members m WHERE m.username = :username",
+                Group.class);
+            query.setParameter("username", user.getUsername());
+            return query.getResultList();
         } catch (Exception e) {
-            Logger.logError("An error occured while getting all of the groups  ", e);
+            Logger.logError("An error occurred while getting all of the groups ", e);
             e.printStackTrace();
         }
-        List<Group> emptyList = new ArrayList<>();
-        return emptyList;
+        return Collections.emptyList();
     }
 
 

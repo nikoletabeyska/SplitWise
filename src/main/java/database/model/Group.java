@@ -42,6 +42,11 @@ public class Group {
     public List<User> getMembers(){
         return this.members;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public void setName(String name){
         this.name = name;
     }

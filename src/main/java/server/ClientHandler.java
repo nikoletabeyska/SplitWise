@@ -121,7 +121,7 @@ public class ClientHandler {
                 }
             case "create-group":
                 if (isLoggedIn) {
-                    if (parts.length <= 3) return "Not enought parameters to create a group";
+                    if (parts.length < 3) return "Not enought parameters to create a group";
                     //Should always have a following param
                     int nameParamIndex = 1;
                     //Name should be a valid not null strin
