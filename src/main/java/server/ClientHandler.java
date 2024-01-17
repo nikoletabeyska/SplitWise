@@ -38,15 +38,20 @@ public class ClientHandler {
 
     public ClientHandler(EntityManager manager) {
 
-        userRepository= new UserRepository(manager);
-        groupRepository= new GroupRepository(manager);
-        friendshipRepository= new FriendshipRepository(manager);
-        transactionRepository= new TransactionRepository(manager);
 
-        this.userManager = new UserManager(userRepository);
-        this.friendshipService = new FriendshipService(userRepository,friendshipRepository);
-        this.groupService = new GroupService(userRepository,groupRepository, friendshipRepository);
-        this.expensesService = new ExpensesService(userRepository,groupRepository,transactionRepository);
+//        userRepository= new UserRepository(manager);
+//        groupRepository= new GroupRepository(manager);
+//        friendshipRepository= new FriendshipRepository(manager);
+//        transactionRepository= new TransactionRepository(manager);
+        RepositoryImplementationMapping.addOrReplace(new UserRepository(manager));
+        RepositoryImplementationMapping.addOrReplace(new GroupRepository(manager));
+        RepositoryImplementationMapping.addOrReplace(new FriendshipRepository(manager));
+        RepositoryImplementationMapping.addOrReplace(new TransactionRepository(manager));
+
+        this.userManager = new UserManager();
+        this.friendshipService = new FriendshipService();
+        this.groupService = new GroupService();
+        this.expensesService = new ExpensesService();
         this.isLoggedIn = false;
         this.userUsername = null;
     }

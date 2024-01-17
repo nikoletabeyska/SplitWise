@@ -34,19 +34,19 @@ config=StructureConfiguration;
     "removeByAnnotation": "",
     "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
     "removeByClassName": "",
-    "cutMappings": true,
+    "cutMappings": false,
     "cutEnum": true,
     "cutTests": true,
     "cutClient": true,
-    "cutDataAccess": true,
-    "cutInterfaceStructures": true,
-    "cutDataStructures": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
     "cutGetterAndSetter": true,
     "cutConstructors": true
   },
   "graphTraversal": {
-    "forwardDepth": 3,
-    "backwardDepth": 3,
+    "forwardDepth": 6,
+    "backwardDepth": 6,
     "classPackageExcludeFilter": "",
     "classPackageIncludeFilter": "",
     "classNameExcludeFilter": "",
@@ -206,6 +206,18 @@ GroupRepository385331925[
 	fillcolor="#FFFFFF"
 ];
 
+RepositoryBase385331925[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RepositoryBase</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   manager: EntityManager [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
 TransactionRepository385331925[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)TransactionRepository</TD></TR>
@@ -316,7 +328,12 @@ GroupService1178841431 -> GroupRepository385331925[label="groupRepository
 GroupService1178841431 -> UserManager1178841431[label="createGroup() -> isValidString()"];
 GroupService1178841431 -> UserRepository385331925[label="userRepository
 [0..1]"];
+RepositoryBase385331925 -> FriendshipRepository385331925[arrowhead=none, arrowtail=empty, dir=both];
+RepositoryBase385331925 -> GroupRepository385331925[arrowhead=none, arrowtail=empty, dir=both];
+RepositoryBase385331925 -> TransactionRepository385331925[arrowhead=none, arrowtail=empty, dir=both];
+RepositoryBase385331925 -> UserRepository385331925[arrowhead=none, arrowtail=empty, dir=both];
 Server905826493 -> ClientHandler905826493[label="handleReadableEvent() -> handleCommand()"];
+TransactionRepository385331925 -> Logger1178841431[label="createTransaction() -> logError()"];
 UserManager1178841431 -> UserRepository385331925[label="userRepository
 [0..1]"];
     

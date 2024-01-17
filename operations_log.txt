@@ -172,3 +172,21 @@
 [2024-01-17 16:49:08] Split 100.0 with Niki for Shared expense by Mihi
 [2024-01-17 16:49:08] Viewed status of all obligations   by Mihi
 [2024-01-17 16:49:08] Viewed status of all obligations   by Mihi
+[2024-01-17 18:41:09] User logged in by n
+[2024-01-17 18:41:14] Viewed status of all obligations   by n
+[2024-01-17 20:38:25] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 20:38:28] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 20:40:56] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 20:40:56] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 20:41:31] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 20:41:31] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 20:41:31] Viewed status of all obligations   by Mihi
+[2024-01-17 20:41:31] Viewed status of all obligations   by Mihi
+[2024-01-17 20:42:39] Added mihi as a friend. by niki
+[2024-01-17 20:42:39] Viewed friend list. by mihi
+[2024-01-17 20:58:25] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 20:58:25] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 20:58:25] Viewed status of all obligations   by Mihi
+[2024-01-17 20:58:25] Viewed status of all obligations   by Mihi
+[2024-01-17 20:58:28] Added mihi as a friend. by niki
+[2024-01-17 20:58:28] Viewed friend list. by mihi

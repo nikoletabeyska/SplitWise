@@ -3,6 +3,7 @@ import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.Friendship;
 import database.model.Group;
 import database.model.User;
+import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
 import server.repository.GroupRepository;
@@ -17,11 +18,11 @@ public class GroupService {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
     private FriendshipRepository friendshipRepository;
-    public GroupService( UserRepository userRepository, GroupRepository groupRepository, FriendshipRepository friendshipRepository)
+    public GroupService()
     {
-        this.groupRepository = groupRepository;
-        this.userRepository = userRepository;
-        this.friendshipRepository = friendshipRepository;
+        this.groupRepository = (GroupRepository) RepositoryImplementationMapping.get(GroupRepository.class);
+        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
+        this.friendshipRepository = (FriendshipRepository) RepositoryImplementationMapping.get(FriendshipRepository.class);
     }
     public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
