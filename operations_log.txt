@@ -166,3 +166,9 @@
 [2024-01-17 16:38:28] User logged in by n
 [2024-01-17 16:38:28] Split 2.5 with m for reason by n
 [2024-01-17 16:38:28] Split 1.24 with group newgroup for reason by n
+[2024-01-17 16:45:46] User logged in by m
+[2024-01-17 16:45:50] Viewed status of all obligations   by m
+[2024-01-17 16:49:08] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 16:49:08] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 16:49:08] Viewed status of all obligations   by Mihi
+[2024-01-17 16:49:08] Viewed status of all obligations   by Mihi
