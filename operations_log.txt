@@ -190,3 +190,5 @@
 [2024-01-17 20:58:25] Viewed status of all obligations   by Mihi
 [2024-01-17 20:58:28] Added mihi as a friend. by niki
 [2024-01-17 20:58:28] Viewed friend list. by mihi
+[2024-01-17 21:33:39] User logged in by n
+[2024-01-17 21:33:47] Viewed status of all obligations   by n

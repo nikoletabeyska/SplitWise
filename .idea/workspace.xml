@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ClientModule:jar" />
-      <artifact name="Splitwise:jar" />
+      <artifact name="SplitwiseClient:jar" />
+      <artifact name="SplitwiseServer:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,16 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/StructureDiagramSimpleSyntax.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ClientModule_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SplitwiseClient_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Splitwise_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SplitwiseServer_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/operations_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/operations_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/RepositoryImplementationMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/RepositoryImplementationMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/StructureDiagram.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/StructureDiagram.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/services/ExpensesServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/server/services/FriendshipServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/services/FriendshipServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/server/services/GroupServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/services/GroupServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/server/services/UserManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/server/services/UserManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ClientModule_jar/ClientModule.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/SplitwiseClient_jar/Splitwise.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Splitwise_jar/Splitwise.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,27 +56,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/SplitWise/src/main/java/server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/SplitWise/src/main/java/server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15248796",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SplitWise\src\main\java\server" />
@@ -211,7 +210,7 @@
       <workItem from="1705493036830" duration="10116000" />
       <workItem from="1705505593754" duration="18000" />
       <workItem from="1705505753470" duration="482000" />
-      <workItem from="1705506257909" duration="11953000" />
+      <workItem from="1705506257909" duration="15569000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -279,7 +278,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
-          <line>124</line>
+          <line>125</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

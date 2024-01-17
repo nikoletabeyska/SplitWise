@@ -109,7 +109,6 @@ public class Server {
         try {
             while (buffer.hasRemaining()) {
                 clientChannel.write(buffer);
-                System.out.println("Buffer content: " + Arrays.toString(buffer.array()));
             }
         } catch (IOException e) {
             // Handle the exception (e.g., client disconnected)

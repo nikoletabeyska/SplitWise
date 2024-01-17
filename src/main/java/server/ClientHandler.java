@@ -54,6 +54,7 @@ public class ClientHandler {
         this.expensesService = new ExpensesService();
         this.isLoggedIn = false;
         this.userUsername = null;
+        Spystem.out.println("Buffer content: " + Arrays.toString(buffer.array()));
     }
 
 //    @Override
