@@ -3,6 +3,7 @@ package server.services;
 import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.User;
 import org.mindrot.jbcrypt.BCrypt;
+import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.UserRepository;
 
@@ -14,8 +15,8 @@ public class UserManager {
 
     private final UserRepository userRepository;
 
-    public UserManager(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserManager() {
+        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
     }
 
     public String registerUser(String username, String password, String userUsername) {

@@ -3,6 +3,7 @@ package server.services;
 import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
+import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
 import server.repository.GroupRepository;
@@ -14,15 +15,14 @@ import java.util.*;
 import java.util.List;
 
 public class ExpensesService {
-
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
 
-    public ExpensesService(UserRepository u, GroupRepository g, TransactionRepository t) {
-        userRepository = u;
-        groupRepository = g;
-        transactionRepository = t;
+    public ExpensesService() {
+        userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
+        groupRepository = (GroupRepository) RepositoryImplementationMapping.get(GroupRepository.class);
+        transactionRepository = (TransactionRepository)RepositoryImplementationMapping.get(TransactionRepository.class);
     }
 
     public String split(String giverName, String takerName, Double amount, String reason) {

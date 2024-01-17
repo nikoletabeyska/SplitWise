@@ -2,6 +2,7 @@ package server.services;
 
 import database.model.Friendship;
 import database.model.User;
+import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
 import server.repository.UserRepository;
@@ -12,9 +13,9 @@ public class FriendshipService {
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
 
-    public FriendshipService(UserRepository userRepository, FriendshipRepository friendshipRepository) {
-        this.userRepository = userRepository;
-        this.friendshipRepository = friendshipRepository;
+    public FriendshipService() {
+        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
+        this.friendshipRepository = (FriendshipRepository) RepositoryImplementationMapping.get(FriendshipRepository.class);
     }
 
     public String addFriend(String userUsername, String friendUsername) {

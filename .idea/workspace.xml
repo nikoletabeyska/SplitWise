@@ -11,6 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="092e2e4b-3cc2-4722-aca2-98dedcb67150" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/operations_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server_structure.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/ExpensesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/FriendshipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/FriendshipService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/services/UserManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +92,7 @@
       <recent name="database.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JavaFX Inclusion">
+  <component name="RunManager">
     <configuration name="JavaFX Inclusion" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
       <module name="Splitwise" />
@@ -201,7 +208,7 @@
       <workItem from="1705493036830" duration="10116000" />
       <workItem from="1705505593754" duration="18000" />
       <workItem from="1705505753470" duration="482000" />
-      <workItem from="1705506257909" duration="1463000" />
+      <workItem from="1705506257909" duration="3800000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1704991033180</created>
@@ -269,8 +276,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
-          <line>119</line>
+          <line>124</line>
           <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/services/UserManager.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
