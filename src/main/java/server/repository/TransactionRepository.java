@@ -112,4 +112,12 @@ public class TransactionRepository extends RepositoryBase{
         List<User> members = query.getResultList();
         return members;
     }
+    public Group getWantedGroup(String groupName){
+        Query query = manager.createQuery(
+                "SELECT g FROM Group g WHERE g.name=:groupName",
+                Group.class);
+        query.setParameter("groupName",groupName);
+        Group wantedGroup = (Group)query.getSingleResult();
+        return wantedGroup;
+    }
 }

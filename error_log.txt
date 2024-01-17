@@ -16,3 +16,9 @@ Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticExcep
 
 Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
 
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+

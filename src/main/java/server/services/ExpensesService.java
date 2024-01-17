@@ -45,15 +45,15 @@ public class ExpensesService {
             return "Invalid input. Username is required.";
         }
         User giver = userRepository.getUserByUsername(giverName);
+
         List<User> membersOfGroup=transactionRepository.getWantedGroupMembers(groupName);
-        //ArrayList<User> takers = new ArrayList<User>();
-
-
-        double splitAmount = amount / membersOfGroup.size();
+        membersOfGroup.remove(userRepository.getUserByUsername(giverName));
+        Group ourGroup = transactionRepository.getWantedGroup(groupName);
+        double splitAmount = amount / (membersOfGroup.size()+1);
         //If all taker names are valid
         for  ( User member : membersOfGroup)
         {
-            transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true));
+            transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true, ourGroup));
         }
 
         //to fix

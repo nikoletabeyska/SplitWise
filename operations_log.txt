@@ -18,3 +18,30 @@
 [2024-01-17 01:52:07] Split 100.0 with Niki for Shared expense by Mihi
 [2024-01-17 01:52:07] Viewed status of all obligations   by Mihi
 [2024-01-17 01:52:07] Viewed status of all obligations   by Mihi
+[2024-01-17 11:56:28] User registered by mihi
+[2024-01-17 11:56:42] User registered by tedinkoto
+[2024-01-17 11:56:56] User registered by thirdUser
+[2024-01-17 11:57:12] User logged in by mihi
+[2024-01-17 11:57:35] Split 10.0 with tedinkoto for splittingtest by mihi
+[2024-01-17 11:58:44] Created new group mockinggroup by mihi
+[2024-01-17 11:59:33] Split 15.0 with group mockinggroup for splittingtestgroup by mihi
+[2024-01-17 12:06:07] User registered by mihinkata
+[2024-01-17 12:06:22] User logged in by mihinkata
+[2024-01-17 12:10:27] User logged in by mihinkata
+[2024-01-17 12:10:45] Viewed status of all obligations   by mihinkata
+[2024-01-17 12:12:41] User registered by tedinkoto
+[2024-01-17 12:12:53] User registered by mihinkata
+[2024-01-17 12:13:13] User registered by thirdUser
+[2024-01-17 12:13:23] User logged in by mihinkata
+[2024-01-17 12:13:41] Split 10.0 with tedinkoto for testing by mihinkata
+[2024-01-17 12:14:19] Created new group testinggroup by mihinkata
+[2024-01-17 12:14:39] Split 15.0 with group testinggroup for testinggroup by mihinkata
+[2024-01-17 12:14:51] Viewed status of all obligations   by mihinkata
+[2024-01-17 12:49:34] Split 100.0 with group Friends for Shared expense by Mihi
+[2024-01-17 12:49:34] Split 100.0 with Niki for Shared expense by Mihi
+[2024-01-17 12:49:34] Viewed status of all obligations   by Mihi
+[2024-01-17 12:49:34] Viewed status of all obligations   by Mihi
+[2024-01-17 13:23:42] Added mihi as a friend. by niki
+[2024-01-17 13:23:42] Viewed friend list. by mihi
+[2024-01-17 13:23:45] Created new group TestGroup by s
+[2024-01-17 13:23:45] Viewed groups  by testUser
