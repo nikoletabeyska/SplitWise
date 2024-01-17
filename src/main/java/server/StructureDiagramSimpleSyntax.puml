@@ -1,0 +1,126 @@
+@startuml
+
+class Server{
+- handleacceptableevent(serversocketchannel: serversocketchannel, selector: selector)
+- handlereadableevent(clientchannel: socketchannel)
++ main(args: string[])
+- sendresponse(clientchannel: socketchannel, message: string, buffer: bytebuffer)
++ startserverchannel()
+}
+class ClientHandler{
+-   friendshiprepository: friendshiprepository [0..1]
+-   grouprepository: grouprepository [0..1]
+-   isloggedin: boolean [1]
+-   reader: bufferedreader [0..1]
+-   transactionrepository: transactionrepository [0..1]
+-   userrepository: userrepository [0..1]
+-   userusername: string [0..1]
+-   writer: printwriter [0..1]
++ handlecommand(command: string): string
+- hashpassword(password: string): string
+}
+package services
+{
+class UserManager{
+-   userrepository: userrepository [0..1]
++ isvalidstring(str: string): boolean
++ loginuser(username: string, password: string): map&lt;string, boolean&gt;
++ registeruser(username: string, password: string, userusername: string): string
+}
+class ExpensesService
+{
+ -   grouprepository: grouprepository [0..1]
+ -   transactionrepository: transactionrepository [0..1]
+ -   userrepository: userrepository [0..1]
++ appendtransactioncategory(categoryname: string, map: map&lt;user, double&gt;): string
+ + gettotalamountperuser(user: user, group: group): map&lt;user, double&gt;
+ + getstatus(username: s+ split(givername: string, takername: string, amount: double, reason: string): stringtring): string
+ + split(givername: string, takername: string, amount: double, reason: string): string
+ + splitgroup(givername: string, groupname: string, amount: double, reason: string): string
+}
+
+class FriendshipService{
+
+-   friendshiprepository: friendshiprepository [0..1]
+-   userrepository: userrepository [0..1]
+
++ addfriend(userusername: string, friendusername: string): string
++ getallfriendslist(userusername: string): string
+}
+
+class GroupService{
+-   friendshiprepository: friendshiprepository [0..1]
+-   grouprepository: grouprepository [0..1]
+-   userrepository: userrepository [0..1]
++ creategroup(groupname: string, users: arraylist&lt;string&gt;, userusername: string): string
++ getgroups(participant: user): string
+}
+}
+
+package Repositories
+{
+
+class logger1178841431{
+- flushbuffer(filename: string, buffer: stringbuilder)
++ log(message: string, user: string)
++ logerror(errormessage: string, exception: exception)
+}
+
+
+class FriendshipRepository{
++ addnewfriendship(friendship: friendship)
++ createnewfriendship(from: user, to: user): friendship
++ getallfriendships(user: user): list&lt;friendship&gt;
+}
+
+
+
+class GroupRepository{
++ creategroup(group: group)
++ getallgroups(user: user): list&lt;group&gt;
+}
+
+class RepositoryBase{
++   manager: entitymanager [0..1]
+}
+
+class TransactionRepository{
++ closeentitymanagerfactory()
++ createtransaction(moneyflowtransaction: moneyflow)
++ getowedmoneyfrom(user: user): map&lt;user, double&gt;
++ getowedmoneyfrom(user: user, group: group): map&lt;user, double&gt;
++ getowedmoneyto(user: user): map&lt;user, double&gt;
++ getowedmoneyto(user: user, group: group): map&lt;user, double&gt;
++ getwantedgroup(groupname: string): group
++ getwantedgroupmembers(groupname: string): list&lt;user&gt;
+- totalamountbyuser(objectlist: list&lt;object[]&gt;): map&lt;user, double&gt;
+}
+
+class UserRepository{
++ closeentitymanagerfactory()
++ createuser(user: user)
++ getuserbyid(userid: long): user
++ getuserbyusername(username: string): user
+}
+}
+
+
+
+class RepositoryImplementationMapping{
++ {static} mapofclasses: class,object
++ {static}addorreplace(object o)
++ {static}get(class c)
+}
+
+ClientHandler -down> Server
+Server --> RepositoryImplementationMapping
+'edges
+RepositoryImplementationMapping --> ExpensesService
+RepositoryImplementationMapping  --> GroupService
+RepositoryImplementationMapping -> UserManager
+RepositoryImplementationMapping -> RepositoryBase
+ClientHandler -> FriendshipService
+ClientHandler -> GroupService
+
+}
+@enduml

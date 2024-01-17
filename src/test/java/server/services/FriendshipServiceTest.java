@@ -6,7 +6,10 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import server.RepositoryImplementationMapping;
 import server.repository.FriendshipRepository;
+import server.repository.GroupRepository;
+import server.repository.TransactionRepository;
 import server.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -24,7 +27,9 @@ public class FriendshipServiceTest {
     void setUp() {
         userRepositoryMock = Mockito.mock(UserRepository.class);
         friendshipRepositoryMock = Mockito.mock(FriendshipRepository.class);
-        friendshipService = new FriendshipService(userRepositoryMock, friendshipRepositoryMock);
+        RepositoryImplementationMapping.addOrReplace(UserRepository.class,userRepositoryMock);
+        RepositoryImplementationMapping.addOrReplace(FriendshipRepository.class,friendshipRepositoryMock);
+        friendshipService = new FriendshipService();
     }
 
 

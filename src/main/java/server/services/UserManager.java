@@ -47,7 +47,15 @@ public class UserManager {
 
         User user = userRepository.getUserByUsername(username);
 
-        if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
+        try
+        {
+            if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
+                result.put("Invalid username or password. Please try again", false);
+                return  result;
+            }
+        }
+        catch (Exception e)
+        {
             result.put("Invalid username or password. Please try again", false);
             return  result;
         }

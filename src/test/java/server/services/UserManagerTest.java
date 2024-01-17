@@ -1,13 +1,19 @@
 package server.services;
 
+import org.hibernate.sql.ast.tree.predicate.BooleanExpressionPredicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import database.model.User;
+import server.RepositoryImplementationMapping;
+import server.repository.FriendshipRepository;
 import server.repository.UserRepository;
 import server.services.UserManager;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -22,6 +28,9 @@ class UserManagerTest {
 
     @BeforeEach
     void setUp() {
+        userRepository= Mockito.mock(UserRepository.class);
+        RepositoryImplementationMapping.addOrReplace(UserRepository.class,userRepository);
+        userManager = new UserManager();
         MockitoAnnotations.openMocks(this);
     }
 
@@ -29,25 +38,25 @@ class UserManagerTest {
     void registerUser_Success() {
         String username = "bobo";
         String password = "123";
-        when(userRepository.getUserByUsername(username)).thenReturn(null);
+        UserRepository u= (UserRepository)RepositoryImplementationMapping.get(UserRepository.class);
+        when(u.getUserByUsername(username)).thenReturn(null);
         String result = userManager.registerUser(username, password, null);
+        assertEquals("User registered successfully! Please login using your credentials.", result);
 
-
-        assertEquals("User registered successfully!", result);
-
-        verify(userRepository, times(1)).getUserByUsername(username);
-        verify(userRepository, times(1)).createUser(any());
+        verify(u, times(1)).getUserByUsername(username);
+        verify(u, times(1)).createUser(any());
     }
 
     @Test
     void registerUser_UsernameTaken() {
         String username = "niki";
         String password = "123";
-        when(userRepository.getUserByUsername(username)).thenReturn(new User(username, "123"));
+        UserRepository u= (UserRepository)RepositoryImplementationMapping.get(UserRepository.class);
+        when(u.getUserByUsername(username)).thenReturn(new User(username, "123"));
         String result = userManager.registerUser(username, password, null);
         assertEquals("Username is already taken. Please choose another one.", result);
-        verify(userRepository, times(1)).getUserByUsername(username);
-        verify(userRepository, never()).createUser(any(User.class));
+        verify(u, times(1)).getUserByUsername(username);
+        verify(u, never()).createUser(any(User.class));
     }
 
     @Test
@@ -69,11 +78,14 @@ class UserManagerTest {
         String password = "test";
         String incorrectPassword = "no";
         User existingUser = new User(username, password);
-        when(userRepository.getUserByUsername(username)).thenReturn(existingUser);
+        UserRepository u= (UserRepository)RepositoryImplementationMapping.get(UserRepository.class);
+        when(u.getUserByUsername(username)).thenReturn(existingUser);
+        Map<String, Boolean> result = userManager.loginUser(username,incorrectPassword);
+        assertEquals("[Invalid username or password. Please try again]", result.keySet().toString());
         //TODO login user method changed declaration, test must be udpated to match
         //String result = userManager.loginUser(username, incorrectPassword, false);
         //assertEquals("Invalid username or password. Please try again.", result);
-        verify(userRepository, times(1)).getUserByUsername(username);
+        verify(u, times(1)).getUserByUsername(username);
     }
 }
 
