@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 import org.mockito.Mockito;
 import server.services.FriendshipService;
+import server.services.Logger;
 
 import static javax.swing.UIManager.put;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,9 +28,7 @@ class TransactionRepositoryTest {
 
         String persistence_unit = "TestPersistenceUnit";
         entityManager = Persistence.createEntityManagerFactory(persistence_unit).createEntityManager();
-        transactionRepository = new TransactionRepository(persistence_unit);
-
-
+        transactionRepository = new TransactionRepository(entityManager);
          mockUsers = new HashMap<>()
                 {{
                         put("Mihinka", new User("Mihinka","12345"));
@@ -119,18 +118,13 @@ class TransactionRepositoryTest {
     @Test
     void testGetWantedGroupMembers() {
 
-        ArrayList<User> ourGroup = new ArrayList<>();
-        ourGroup.add(mockUsers.get("Mihinka"));
-        ourGroup.add(mockUsers.get("Nikinka"));
-        ourGroup.add(mockUsers.get("Tedinko"));
+        Set<User> groupSet = new HashSet<>();
+        groupSet.add(mockUsers.get("Mihinka"));
+        groupSet.add(mockUsers.get("Nikinka"));
+        groupSet.add(mockUsers.get("Tedinko"));
 
         ArrayList<User> result = (ArrayList<User>) transactionRepository.getWantedGroupMembers("ourGroup");
-        boolean isDifferent=false;
-       for (int i=0;i<ourGroup.size();i++){
-           if(!ourGroup.get(i).equals(result.get(i))){
-               isDifferent=true;
-           }
-       }
-       assertEquals(false,isDifferent);
+        Set<User> resultSet = new HashSet<>(result);
+        assertEquals(true,groupSet.equals(resultSet));
     }
 }

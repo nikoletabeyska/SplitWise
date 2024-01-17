@@ -10,20 +10,16 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.*;
+import server.Server;
 import server.services.Logger;
 
 import java.util.*;
 
 
-public class TransactionRepository {
+public class TransactionRepository extends RepositoryBase{
 
-    private final EntityManager manager;
-    private final Logger logger;
-
-
-    public TransactionRepository(String factoryName) {
-        this.manager = Persistence.createEntityManagerFactory(factoryName).createEntityManager();
-        logger = new Logger();
+    public TransactionRepository(EntityManager manager) {
+        super(manager);
     }
 
 
@@ -50,7 +46,7 @@ public class TransactionRepository {
             }
             return toReturn;
         } catch (Exception e) {
-            logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -79,7 +75,7 @@ public class TransactionRepository {
             }
             return toReturn;
         } catch (Exception e) {
-            logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
         return null;
@@ -97,7 +93,7 @@ public class TransactionRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            logger.logError("An error occured  ", e);
+            Logger.logError("An error occured  ", e);
             e.printStackTrace();
         }
     }

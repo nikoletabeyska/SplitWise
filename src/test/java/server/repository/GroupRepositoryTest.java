@@ -21,17 +21,12 @@ class GroupRepositoryTest {
     private GroupRepository groupRepository;
     private EntityManager entityManager;
     private EntityTransaction transaction;
-    private Logger logger;
 
     @BeforeEach
     void setUp() {
         entityManager = mock(EntityManager.class);
         transaction = mock(EntityTransaction.class);
-
-        groupRepository = new GroupRepository("testRepo");
-        logger = new Logger();
-
-
+        groupRepository = new GroupRepository(entityManager);
     }
 
     @Test

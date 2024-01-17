@@ -2,7 +2,7 @@ package server.services;
 
 import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.User;
-import org.mindrot.jbcrypt.BCrypt;
+import server.Server;
 import server.repository.UserRepository;
 
 
@@ -12,16 +12,9 @@ import java.util.Map;
 public class UserManager {
 
     private final UserRepository userRepository;
-    private Logger logger;
 
-    public UserManager() {
-        userRepository = new UserRepository();
-        logger = new Logger();
-    }
-
-    public UserManager(UserRepository userRepository, Logger logger) {
+    public UserManager(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.logger = logger;
     }
 
     public String registerUser(String username, String password, String userUsername) {
@@ -38,7 +31,7 @@ public class UserManager {
         userRepository.createUser(newUser);
         userUsername = username;
 
-        logger.log("User registered", username);
+        Logger.log("User registered", username);
         return "User registered successfully!";
 
     }
@@ -52,11 +45,11 @@ public class UserManager {
 
         User user = userRepository.getUserByUsername(username);
 
-        if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
+        if (user == null || !user.getPassword().equals(password)) {
             result.put("Invalid username or password. Please try again", false);
             return  result;
         }
-        logger.log("User logged in", username);
+        Logger.log("User logged in", username);
         result.put("Login successful! Welcome, " + username + "!", true);
 
         return result;

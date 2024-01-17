@@ -1,6 +1,7 @@
 package server;
 
-import server.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import server.repository.*;
 import server.services.ExpensesService;
 import server.services.FriendshipService;
 import server.services.GroupService;
@@ -30,13 +31,24 @@ public class ClientHandler {
     private boolean isLoggedIn;
     private String userUsername;
 
-    public ClientHandler() {
-       this.userManager = new UserManager();
-       this.friendshipService = new FriendshipService();
-       this.groupService = new GroupService();
-       this.expensesService = new ExpensesService();
-       this.isLoggedIn = false;
-       this.userUsername = null;
+    private UserRepository userRepository;
+    private GroupRepository groupRepository;
+    private FriendshipRepository friendshipRepository;
+    private TransactionRepository transactionRepository;
+
+    public ClientHandler(EntityManager manager) {
+
+        userRepository= new UserRepository(manager);
+        groupRepository= new GroupRepository(manager);
+        friendshipRepository= new FriendshipRepository(manager);
+        transactionRepository= new TransactionRepository(manager);
+
+        this.userManager = new UserManager(userRepository);
+        this.friendshipService = new FriendshipService(userRepository,friendshipRepository);
+        this.groupService = new GroupService(userRepository,groupRepository);
+        this.expensesService = new ExpensesService(userRepository,groupRepository,transactionRepository);
+        this.isLoggedIn = false;
+        this.userUsername = null;
     }
 
 //    @Override
@@ -144,19 +156,6 @@ public class ClientHandler {
                 } else {
                     return "This command requires log in.";
                 }
-            case "get-groups":
-                if (isLoggedIn) {
-                    return groupService.getGroups(this.userUsername);
-                } else {
-                    return "This command requires log in.";
-                }
-            case "get-friends":
-                if (isLoggedIn) {
-                    return friendshipService.getAllFriendsList(this.userUsername);
-                } else {
-                    return "This command requires log in.";
-                }
-
             default:
                 return "Unknown command: " + commandType;
         }

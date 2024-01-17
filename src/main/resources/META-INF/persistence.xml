@@ -9,8 +9,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Entities -->
-        <class>com.example.domain.User</class>
-        <!-- Add other entity classes as needed -->
+        <class>database.model.Moneyflow</class>
+        <class>database.model.Friendship</class>
+        <class>database.model.Group</class>
+        <class>database.model.User</class>
 
         <!-- Database configuration -->
         <properties>
@@ -21,6 +23,8 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/splitwise_db"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value=""/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+
         </properties>
     </persistence-unit>
 

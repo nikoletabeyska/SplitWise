@@ -6,3 +6,13 @@ Exception: java.lang.IllegalArgumentException: Argument [Mihinka] of type [java.
 
 Exception: java.lang.IllegalArgumentException: Argument [Mihinka] of type [java.lang.String] did not match parameter type [database.model.User (n/a)]
 
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
+Exception: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: A query exception occurred [SELECT g FROM Group g WHERE :username in g.members  ]
+
