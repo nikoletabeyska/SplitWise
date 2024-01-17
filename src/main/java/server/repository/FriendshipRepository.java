@@ -50,4 +50,6 @@ public class FriendshipRepository extends  RepositoryBase  {
         }
         return friendships;
     }
+
+
 }

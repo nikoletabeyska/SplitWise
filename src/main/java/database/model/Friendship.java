@@ -39,4 +39,7 @@ public class Friendship{
         return secondFriend;
     }
 
+    public int getId() {
+        return id;
+    }
 }
