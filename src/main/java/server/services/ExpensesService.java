@@ -3,6 +3,7 @@ package server.services;
 import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
+import server.ClassesInitializer;
 import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
@@ -19,10 +20,10 @@ public class ExpensesService {
     private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
 
-    public ExpensesService() {
-        userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
-        groupRepository = (GroupRepository) RepositoryImplementationMapping.get(GroupRepository.class);
-        transactionRepository = (TransactionRepository)RepositoryImplementationMapping.get(TransactionRepository.class);
+    public ExpensesService(ClassesInitializer initializer) {
+        this.userRepository = initializer.getUserRepository();
+        this.transactionRepository = initializer.getTransactionRepository();
+        this.groupRepository = initializer.getGroupRepository();
     }
 
     public String split(String giverName, String takerName, Double amount, String reason) {
@@ -59,7 +60,6 @@ public class ExpensesService {
             transactionRepository.createTransaction(new Moneyflow(giver, member, splitAmount, reason, true, ourGroup));
         }
 
-        //to fix
         Logger.log("Split " + amount + " with group " + groupName + " for " + reason, giverName);
         return "Successfully split money.";
     }
@@ -91,7 +91,7 @@ public class ExpensesService {
     }
 
     public String AppendTransactionCategory(String categoryName, Map<User, Double> map) {
-        String result = "\nTo/From    " + categoryName + "\n";
+        String result = "\n" + categoryName + "\n";
         for (Map.Entry<User, Double> entry : map.entrySet()) {
             User muser = entry.getKey();
             Double amount = entry.getValue();
@@ -112,9 +112,9 @@ public class ExpensesService {
         //Get all transaction in which user is part of
         String result = "";
         Map<User, Double> mergedMap = GetTotalAmountPerUser(user, null);
-        result += AppendTransactionCategory("Individuals", mergedMap);
-        result += "Groups";
+        result += AppendTransactionCategory("Individual obligations:", mergedMap);
         List<Group> groups = groupRepository.getAllGroups(user);
+        if (!groups.isEmpty()) result += "Your groups:";
 
         for (Group g : groups) {
             Map<User, Double> groupAmount = GetTotalAmountPerUser(user, g);

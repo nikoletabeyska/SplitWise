@@ -22,7 +22,9 @@ public class GroupRepository extends RepositoryBase {
 
         try {
             transaction = manager.getTransaction();
-            transaction.begin();
+            if (!transaction.isActive()) {
+                transaction.begin();
+            }
 
             manager.persist(group);
 

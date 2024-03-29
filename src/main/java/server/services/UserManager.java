@@ -3,6 +3,7 @@ package server.services;
 import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.User;
 import org.mindrot.jbcrypt.BCrypt;
+import server.ClassesInitializer;
 import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.UserRepository;
@@ -13,10 +14,10 @@ import java.util.Map;
 
 public class UserManager {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public UserManager() {
-        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
+    public UserManager(ClassesInitializer initializer) {
+        this.userRepository = initializer.getUserRepository();
     }
 
     public String registerUser(String username, String password, String userUsername) {
@@ -47,15 +48,12 @@ public class UserManager {
 
         User user = userRepository.getUserByUsername(username);
 
-        try
-        {
+        try {
             if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
                 result.put("Invalid username or password. Please try again", false);
                 return  result;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             result.put("Invalid username or password. Please try again", false);
             return  result;
         }

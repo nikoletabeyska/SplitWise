@@ -8,6 +8,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import server.services.Logger;
@@ -58,16 +59,13 @@ public class FriendshipRepositoryTest {
 
         }
 
-        private User PrimitiveUserGet(String username)
-        {
+        private User PrimitiveUserGet(String username) {
             Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
             query.setParameter("username", username);
-
 
             try {
                 return (User)query.getSingleResult();
             } catch (Exception e) {
-                // Handle the case when no result is found
                 return null;
             }
 
@@ -133,6 +131,13 @@ public class FriendshipRepositoryTest {
                 transaction.rollback();
             }
             e.printStackTrace();
+        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
         }
     }
 

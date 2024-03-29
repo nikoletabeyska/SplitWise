@@ -95,24 +95,18 @@ class TransactionRepositoryTest {
     @Test
     void testGetOwedMoneyFromIndividuals() {
         User userToGet = PrimitiveUserGet("Mihinka");
-       Map<User,Double> result = transactionRepository.getOwedMoneyFrom(userToGet,null);
-        Map<User,Double> expected = new HashMap<User,Double>()
-        {{
-            put(PrimitiveUserGet("Nikinka"),10.0);
-            put(PrimitiveUserGet("Daninko"),40.0);
-
-        }};
-        assertEquals(result,expected);
+        Map<User,Double> result = transactionRepository.getOwedMoneyFrom(userToGet);
+        Map<User,Double> expected = new HashMap<User,Double>();
+        expected.put(PrimitiveUserGet("Nikinka"),10.0);
+        expected.put(PrimitiveUserGet("Daninko"),40.0);
+        assertEquals(expected, result);
     }
     @Test
     void testGetOwedMoneyToIndividuals() {
         User userToGet = PrimitiveUserGet("Daninko");
-        Map<User,Double> result = transactionRepository.getOwedMoneyTo(userToGet,null);
-        Map<User,Double> expected = new HashMap<User,Double>()
-        {{
-            put(PrimitiveUserGet("Mihinka"),40.0);
-
-        }};
+        Map<User,Double> result = transactionRepository.getOwedMoneyTo(userToGet);
+        Map<User,Double> expected = new HashMap<User,Double>();
+        expected.put(PrimitiveUserGet("Mihinka"), 40.0);
         assertEquals(expected,result);
     }
     @Test

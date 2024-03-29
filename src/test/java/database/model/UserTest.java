@@ -10,10 +10,6 @@ class UserTest {
     @org.junit.jupiter.api.Test
     void testGetUsername() {
         assertEquals("mih1711",testUser.getUsername(),"user.getUsername() works as expected!");
-        //Pair<Double,String> expense = new Pair<Double,String>(12.0,"Tony");
-        //ArrayList<Pair<Double,String>> listOfExpenses = new ArrayList<Pair<Double,String>>();
-        //listOfExpenses.add(expense);
-
     }
 
     @org.junit.jupiter.api.Test

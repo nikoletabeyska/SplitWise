@@ -2,6 +2,7 @@ package server.services;
 
 import database.model.Friendship;
 import database.model.User;
+import server.ClassesInitializer;
 import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
@@ -13,9 +14,9 @@ public class FriendshipService {
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
 
-    public FriendshipService() {
-        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
-        this.friendshipRepository = (FriendshipRepository) RepositoryImplementationMapping.get(FriendshipRepository.class);
+    public FriendshipService(ClassesInitializer initializer) {
+        this.userRepository = initializer.getUserRepository();
+        this.friendshipRepository = initializer.getFriendshipRepository();
     }
 
     public String addFriend(String userUsername, String friendUsername) {
@@ -27,6 +28,9 @@ public class FriendshipService {
         User friend = userRepository.getUserByUsername(friendUsername);
         if (friend == null) {
             return "User with username " + friendUsername + " does not exist.";
+        }
+        if (checkFriendshipExistence(user, friend)) {
+            return "Friendship is already created!";
         }
         Friendship friendship = new Friendship(user, friend);
         friendshipRepository.addNewFriendship(friendship);
@@ -51,6 +55,14 @@ public class FriendshipService {
 
         Logger.log("Viewed friend list.", userUsername);
         return friendsList;
+    }
+
+    public boolean checkFriendshipExistence(User user1, User user2) {
+        List<Friendship> friendships = friendshipRepository.getAllFriendships(user1);
+        boolean exists = friendships.stream()
+            .anyMatch(friendship -> (friendship.getFirstFriend().equals(user2)
+                || friendship.getSecondFriend().equals(user2)));
+        return exists;
     }
 
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import server.services.Logger;
 
+import java.awt.image.DataBufferDouble;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,25 +25,26 @@ import java.util.*;
 public class Server {
     public static final int PORT = 7777;
     private static final String SERVER_HOST = "localhost";
-    private static Map <SocketChannel, ClientHandler> clients = new HashMap<>();
+    private static Map<SocketChannel, ClientHandler> clients = new HashMap<>();
     private static final String PERSISTENCE_UNIT_NAME = "SplitWisePersistenceUnit";
+    private static final int BUFFER_CAPACITY = 1024;
 
     private static EntityManagerFactory entityManagerFactory = null;
     //static entity manager used for a global connection with the database
     public static EntityManager manager = null;
+    private static ClassesInitializer initializer;
 
     public static void main(String[] args) throws IOException {
-        // establish connection with the database
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         manager = entityManagerFactory.createEntityManager();
-        //Start accepting user commands
+        initializer = new ClassesInitializer(manager);
+
         startServerChannel();
     }
     public static void startServerChannel() {
-        try {
-            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
             ServerSocket serverSocket = serverSocketChannel.socket();
-            serverSocket.bind(new InetSocketAddress(SERVER_HOST,PORT));
+            serverSocket.bind(new InetSocketAddress(SERVER_HOST, PORT));
             serverSocketChannel.configureBlocking(false);
 
             Selector selector = Selector.open();
@@ -66,9 +68,8 @@ public class Server {
                     }
                 }
             }
-        }
-        catch (IOException e) {
-            //e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -76,13 +77,13 @@ public class Server {
         SocketChannel clientChannel = serverSocketChannel.accept();
         clientChannel.configureBlocking(false);
         clientChannel.register(selector, SelectionKey.OP_READ);
-        clients.put(clientChannel,new ClientHandler(manager));
+        clients.put(clientChannel, new ClientHandler(initializer));
 
         System.out.println("Accepted connection from " + clientChannel.getRemoteAddress());
     }
 
     private static void handleReadableEvent(SocketChannel clientChannel) throws IOException {
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
         int bytesRead = clientChannel.read(buffer);
 
         if (bytesRead == -1) {
@@ -93,9 +94,7 @@ public class Server {
             byte[] data = new byte[buffer.remaining()];
             buffer.get(data);
             String receivedMessage = new String(data);
-            if(receivedMessage.equals("get-status")){
-                System.out.println("Neshto");
-            }
+
             ClientHandler handlerForConnection = clients.get(clientChannel);
             sendResponse(clientChannel, handlerForConnection.handleCommand(receivedMessage), buffer);
         }
@@ -111,7 +110,6 @@ public class Server {
                 clientChannel.write(buffer);
             }
         } catch (IOException e) {
-            // Handle the exception (e.g., client disconnected)
             clientChannel.close();
             System.out.println("Client disconnected");
         }

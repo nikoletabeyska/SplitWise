@@ -3,6 +3,7 @@ import com.mysql.cj.conf.ConnectionUrlParser;
 import database.model.Friendship;
 import database.model.Group;
 import database.model.User;
+import server.ClassesInitializer;
 import server.RepositoryImplementationMapping;
 import server.Server;
 import server.repository.FriendshipRepository;
@@ -18,11 +19,12 @@ public class GroupService {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
     private FriendshipRepository friendshipRepository;
-    public GroupService()
-    {
-        this.groupRepository = (GroupRepository) RepositoryImplementationMapping.get(GroupRepository.class);
-        this.userRepository = (UserRepository) RepositoryImplementationMapping.get(UserRepository.class);
-        this.friendshipRepository = (FriendshipRepository) RepositoryImplementationMapping.get(FriendshipRepository.class);
+    private FriendshipService friendshipService;
+    public GroupService(ClassesInitializer initializer) {
+        this.groupRepository = initializer.getGroupRepository();
+        this.userRepository = initializer.getUserRepository();
+        this.friendshipRepository = initializer.getFriendshipRepository();
+        this.friendshipService = initializer.getFriendshipService();
     }
     public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
@@ -34,20 +36,13 @@ public class GroupService {
             if (user == null) {
                 return "User with username " + username + " does not exist.";
             }
-            List<Friendship> friendships = friendshipRepository.getAllFriendships(userRepository.getUserByUsername(userUsername));
-            if (friendships == null) {
-                return "You have no friends to create group. Add the passed parameters to your friends list.";
+            //business logic for friendship requirements
+            boolean exists = friendshipService.checkFriendshipExistence(user, userRepository.getUserByUsername(userUsername));
+            if (exists) {
+                groupMembers.add(user);
+            } else {
+                return "User with username " + username + " is not in your friend list.";
             }
-            //TODO consider business logic for friendship requirements
-            groupMembers.add(user);
-//            for (Friendship f : friendships) {
-//                if (f.getFirstFriend().equals(username) || f.getSecondFriend().equals(username)) {
-//                    groupMembers.add(user);
-//
-//                } else {
-//                    return "User with username " + username + " is not your friend. Add him to your friends list to create this group";
-//                }
-//            }
         }
         if (groupMembers.size() < 3) {
             return "Not enough members to create a group!";

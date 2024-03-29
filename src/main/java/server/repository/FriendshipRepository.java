@@ -10,7 +10,6 @@ import java.util.List;
 
 public class FriendshipRepository extends  RepositoryBase  {
 
-
     public FriendshipRepository(EntityManager manager) {
         super(manager);
     }

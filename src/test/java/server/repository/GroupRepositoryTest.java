@@ -67,7 +67,6 @@ class GroupRepositoryTest {
         try {
             return (User)query.getSingleResult();
         } catch (Exception e) {
-            // Handle the case when no result is found
             return null;
         }
 
@@ -106,7 +105,6 @@ class GroupRepositoryTest {
             if (!transaction.isActive()) {
                 transaction.begin();
             }
-
 
             Group group1 = new Group("Group1", List.of(PrimitiveUserGet("Mihinka"),PrimitiveUserGet("Tedinko"),PrimitiveUserGet("Nikinko")));
             Group group2 = new Group("Group2", List.of(PrimitiveUserGet("Mihinka"), PrimitiveUserGet("Tedinko"), PrimitiveUserGet("Nikinko")));

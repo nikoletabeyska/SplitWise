@@ -19,14 +19,8 @@ public class Friendship{
     private User secondFriend;
 
     // it demands a no-arguments constructor
-    public Friendship(){
-    }
-    // Constructors, getters, and setters
+    public Friendship(){}
     public Friendship(User firstFriend, User secondFriend) {
-        this.firstFriend = firstFriend;
-        this.secondFriend = secondFriend;
-    }
-    public Friendship(User firstFriend, User secondFriend, double amount) {
         this.firstFriend = firstFriend;
         this.secondFriend = secondFriend;
     }

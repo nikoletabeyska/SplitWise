@@ -25,16 +25,14 @@ public class TransactionRepository extends RepositoryBase{
     private Map<User,Double> totalAmountByUser(List<Object[]> objectList)
     {
         Map<User,Double> toReturn = new HashMap<>();
-        for (Object[] o : (List<Object[]>)objectList)
-        {
+        for (Object[] o : (List<Object[]>)objectList) {
             toReturn.put((User)o[0], (Double)o[1]);
         }
         return  toReturn;
     }
 
     //Get owed money to an individual outside of what is owed in a group
-    public Map<User,Double> getOwedMoneyTo(User user)
-    {
+    public Map<User,Double> getOwedMoneyTo(User user) {
         Query query = null;
         query = manager.createQuery(
                 "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
@@ -45,8 +43,7 @@ public class TransactionRepository extends RepositoryBase{
     }
     //Get owed money to a user in specified group
     //NULL group return and empty map
-    public Map<User,Double> getOwedMoneyTo(User user, Group group)
-    {
+    public Map<User,Double> getOwedMoneyTo(User user, Group group) {
         //Group must not be null
         if(group==null)
             return  new HashMap<>();
