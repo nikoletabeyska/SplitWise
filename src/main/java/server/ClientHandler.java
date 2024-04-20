@@ -42,9 +42,7 @@ public class ClientHandler {
         if (parts.length < 1) {
             return "Invalid command format";
         }
-
         String commandType = parts[0];
-
         switch (commandType) {
             case "help":
                 return HELP_COMMANDS;
@@ -152,5 +150,4 @@ public class ClientHandler {
         String salt = BCrypt.gensalt();
         return BCrypt.hashpw(password, salt);
     }
-
 }

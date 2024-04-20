@@ -19,13 +19,8 @@ public class JPATest {
 
         try {
             System.out.println("Connected to the database!");
-
-            // Insert a user
             insertUser(entityManager, "john_doe", "password123");
-
-            // Retrieve and display all users
             displayAllUsers(entityManager);
-
         } finally {
             entityManager.close();
             entityManagerFactory.close();
@@ -35,13 +30,9 @@ public class JPATest {
     private static void insertUser(EntityManager entityManager, String username, String password) {
         try {
             entityManager.getTransaction().begin();
-
             User user = new User(username, password);
-
             entityManager.persist(user);
-
             entityManager.getTransaction().commit();
-
             System.out.println("User inserted successfully!");
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

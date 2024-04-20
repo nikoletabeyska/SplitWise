@@ -23,6 +23,7 @@ import java.util.*;
 
 
 public class Server {
+
     public static final int PORT = 7777;
     private static final String SERVER_HOST = "localhost";
     private static Map<SocketChannel, ClientHandler> clients = new HashMap<>();
@@ -37,10 +38,11 @@ public class Server {
     public static void main(String[] args) throws IOException {
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         manager = entityManagerFactory.createEntityManager();
-        initializer = new ClassesInitializer(manager);
+        initializer = ClassesInitializer.getInstance(manager);
 
         startServerChannel();
     }
+
     public static void startServerChannel() {
         try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
             ServerSocket serverSocket = serverSocketChannel.socket();

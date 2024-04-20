@@ -15,16 +15,14 @@ import server.services.Logger;
 
 import java.util.*;
 
-
-public class TransactionRepository extends RepositoryBase{
+public class TransactionRepository extends RepositoryBase {
 
     public TransactionRepository(EntityManager manager) {
         super(manager);
     }
 
-    private Map<User,Double> totalAmountByUser(List<Object[]> objectList)
-    {
-        Map<User,Double> toReturn = new HashMap<>();
+    private Map<User, Double> totalAmountByUser(List<Object[]> objectList) {
+        Map<User, Double> toReturn = new HashMap<>();
         for (Object[] o : (List<Object[]>)objectList) {
             toReturn.put((User)o[0], (Double)o[1]);
         }
@@ -32,7 +30,7 @@ public class TransactionRepository extends RepositoryBase{
     }
 
     //Get owed money to an individual outside of what is owed in a group
-    public Map<User,Double> getOwedMoneyTo(User user) {
+    public Map<User, Double> getOwedMoneyTo(User user) {
         Query query = null;
         query = manager.createQuery(
                 "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
@@ -43,9 +41,10 @@ public class TransactionRepository extends RepositoryBase{
     }
     //Get owed money to a user in specified group
     //NULL group return and empty map
+
     public Map<User,Double> getOwedMoneyTo(User user, Group group) {
         //Group must not be null
-        if(group==null)
+        if(group == null)
             return  new HashMap<>();
         Query query = manager.createQuery(
                 "SELECT t.giver, sum(t.amount) FROM Moneyflow t WHERE t.taker.username = :username " +
@@ -56,10 +55,8 @@ public class TransactionRepository extends RepositoryBase{
         return totalAmountByUser(query.getResultList());
     }
 
-
     //Get owed money from an individual outside of what is owed in a group
-    public  Map<User, Double> getOwedMoneyFrom(User user)
-    {
+    public  Map<User, Double> getOwedMoneyFrom(User user) {
         Query query = manager.createQuery(
                 "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
                         "AND t.group IS NULL AND isActive=true  group by t.taker",
@@ -67,12 +64,13 @@ public class TransactionRepository extends RepositoryBase{
         query.setParameter("username", user.getUsername());
         return totalAmountByUser(query.getResultList());
     }
+
     //Get owed money from a user in specified group
     //NULL group return and empty map
-    public  Map<User, Double> getOwedMoneyFrom(User user,Group group)
-    {
-        if(group==null)
+    public  Map<User, Double> getOwedMoneyFrom(User user,Group group) {
+        if (group == null) {
             return new HashMap<>();
+        }
         Query query = manager.createQuery(
                 "SELECT t.taker, sum(t.amount) FROM Moneyflow t WHERE t.giver.username = :username " +
                         "AND  t.group = :group AND isActive=true  group by t.taker",
@@ -84,7 +82,6 @@ public class TransactionRepository extends RepositoryBase{
 
     public void createTransaction(Moneyflow moneyflowTransaction) {
         EntityTransaction transaction = null;
-
         try {
             transaction = manager.getTransaction();
             transaction.begin();
@@ -99,26 +96,27 @@ public class TransactionRepository extends RepositoryBase{
             e.printStackTrace();
         }
     }
+
     public void closeEntityManagerFactory() {
         if (manager != null && manager.isOpen()) {
             manager.close();
         }
     }
 
-    public List<User> getWantedGroupMembers(String groupName){
-
+    public List<User> getWantedGroupMembers(String groupName) {
         Query query = manager.createQuery(
                 "SELECT g.members FROM Group g WHERE g.name=:groupName",
                 User.class);
-        query.setParameter("groupName",groupName);
+        query.setParameter("groupName", groupName);
         List<User> members = query.getResultList();
         return members;
     }
-    public Group getWantedGroup(String groupName){
+
+    public Group getWantedGroup(String groupName) {
         Query query = manager.createQuery(
                 "SELECT g FROM Group g WHERE g.name=:groupName",
                 Group.class);
-        query.setParameter("groupName",groupName);
+        query.setParameter("groupName", groupName);
         Group wantedGroup = (Group)query.getSingleResult();
         return wantedGroup;
     }

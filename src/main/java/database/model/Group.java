@@ -24,10 +24,10 @@ public class Group {
     )
 
     private List<User> members;
+
     public Group(){
         this.members = new ArrayList<>();
     }
-    // Constructors, getters, and setters
     public Group(String name){
         this.name = name;
         this.members = new ArrayList<>();

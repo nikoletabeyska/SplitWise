@@ -11,6 +11,7 @@ import server.repository.UserRepository;
 import java.util.List;
 
 public class FriendshipService {
+
     private final UserRepository userRepository;
     private final FriendshipRepository friendshipRepository;
 
@@ -64,5 +65,4 @@ public class FriendshipService {
                 || friendship.getSecondFriend().equals(user2)));
         return exists;
     }
-
 }

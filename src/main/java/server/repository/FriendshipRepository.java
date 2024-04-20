@@ -23,9 +23,7 @@ public class FriendshipRepository extends  RepositoryBase  {
         try {
             transaction = manager.getTransaction();
             transaction.begin();
-
             manager.persist(friendship);
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
@@ -38,7 +36,6 @@ public class FriendshipRepository extends  RepositoryBase  {
 
     public List<Friendship> getAllFriendships(User user) {
         List<Friendship> friendships = null;
-
         try {
             Query query = manager.createQuery("SELECT f FROM Friendship f WHERE f.firstFriend = :user OR f.secondFriend = :user", Friendship.class);
             query.setParameter("user", user);
@@ -49,6 +46,4 @@ public class FriendshipRepository extends  RepositoryBase  {
         }
         return friendships;
     }
-
-
 }

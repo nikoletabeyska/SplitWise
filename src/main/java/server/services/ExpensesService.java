@@ -4,18 +4,14 @@ import database.model.Group;
 import database.model.Moneyflow;
 import database.model.User;
 import server.ClassesInitializer;
-import server.RepositoryImplementationMapping;
-import server.Server;
-import server.repository.FriendshipRepository;
 import server.repository.GroupRepository;
 import server.repository.TransactionRepository;
 import server.repository.UserRepository;
-
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 public class ExpensesService {
+
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final TransactionRepository transactionRepository;
@@ -149,15 +145,12 @@ public class ExpensesService {
         if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
         }
-
         User giver = userRepository.getUserByUsername(giverName);
         List<Group> userGroups = groupRepository.getAllGroups(giver);
         for (Group g : userGroups) {
             if (g.getName().equals(groupName)) {
-
                 List<User> membersOfGroup = transactionRepository.getWantedGroupMembers(groupName);
                 membersOfGroup.remove(userRepository.getUserByUsername(giverName));
-
                 Map<User, Double> map = GetTotalAmountPerUser(giver, g);
                 List<User> membersToGetPayed = new ArrayList<>();
                 for (Map.Entry<User, Double> entry : map.entrySet()) {
@@ -166,7 +159,6 @@ public class ExpensesService {
                     if (entry.getValue() < 0)
                         membersToGetPayed.add(muser);
                 }
-
                 double splitAmount = givenAmount / (membersToGetPayed.size());
                 //If all taker names are valid
                 for (User member : membersToGetPayed ) {
@@ -175,10 +167,8 @@ public class ExpensesService {
                 }
                 Logger.log("Payed " + givenAmount + " to group " + groupName, giverName);
                 return "Successfull payment!";
-
             }
         }
-
         return "You don't participate in such group.";
     }
 }

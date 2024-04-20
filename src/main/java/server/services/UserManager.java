@@ -24,19 +24,14 @@ public class UserManager {
         if (!isValidString(username) || !isValidString(password)) {
             return "Invalid input. Username and password are required.";
         }
-
-        // Check if the username is already taken
         if (userRepository.getUserByUsername(username) != null) {
             return "Username is already taken. Please choose another one.";
         }
-
         User newUser = new User(username, password);
         userRepository.createUser(newUser);
         userUsername = username;
-
         Logger.log("User registered", username);
         return "User registered successfully! Please login using your credentials.";
-
     }
 
     public Map<String, Boolean> loginUser(String username, String password) {
@@ -45,9 +40,7 @@ public class UserManager {
             result.put("Invalid input. Username and password are required.", false);
             return result;
         }
-
         User user = userRepository.getUserByUsername(username);
-
         try {
             if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
                 result.put("Invalid username or password. Please try again", false);
@@ -66,6 +59,4 @@ public class UserManager {
     public static boolean isValidString(String str) {
         return !(str == null || str.trim().isEmpty());
     }
-
-
 }

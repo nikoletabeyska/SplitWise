@@ -16,16 +16,19 @@ import java.util.List;
 import java.util.Set;
 
 public class GroupService {
+
     private GroupRepository groupRepository;
     private UserRepository userRepository;
     private FriendshipRepository friendshipRepository;
     private FriendshipService friendshipService;
+
     public GroupService(ClassesInitializer initializer) {
         this.groupRepository = initializer.getGroupRepository();
         this.userRepository = initializer.getUserRepository();
         this.friendshipRepository = initializer.getFriendshipRepository();
         this.friendshipService = initializer.getFriendshipService();
     }
+
     public String createGroup(String groupName, ArrayList<String> users, String userUsername) {
         if (!UserManager.isValidString(groupName)) {
             return "Invalid input. Group name is required.";
@@ -61,5 +64,4 @@ public class GroupService {
         Logger.log("Viewed groups ", participant.getUsername());
         return groupList;
     }
-
 }

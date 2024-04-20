@@ -13,31 +13,29 @@ import java.util.List;
 import java.util.Map;
 
 public class GroupRepository extends RepositoryBase {
+
     public GroupRepository(EntityManager manager) {
        super(manager);
     }
 
     public void createGroup(Group group) {
         EntityTransaction transaction = null;
-
         try {
             transaction = manager.getTransaction();
             if (!transaction.isActive()) {
                 transaction.begin();
             }
-
             manager.persist(group);
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-
             Logger.logError("An error occured while creating a group  ", e);
             e.printStackTrace();
         }
     }
+
     public List<Group> getAllGroups(User user) {
         try {
             Query query = manager.createQuery(
@@ -51,9 +49,4 @@ public class GroupRepository extends RepositoryBase {
         }
         return Collections.emptyList();
     }
-
-
-
-
-
 }
